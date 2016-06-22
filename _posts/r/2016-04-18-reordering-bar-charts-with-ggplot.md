@@ -1,0 +1,116 @@
+---
+layout: post
+title: "Reordering Bar Charts with ggplot"
+modified:
+categories: r
+excerpt:  "A simple way to reorder factors to use in bar charts + ggplot"
+tags: [R, ggplot, data visualisation]
+comments: true
+share: true
+image:
+  feature:
+date: 2016-04-18
+---
+  
+Found this solution on stack overflow and it was brilliant!
+  
+[http://stackoverflow.com/questions/5967593/ordering-of-bars-in-ggplot](http://stackoverflow.com/questions/5967593/ordering-of-bars-in-ggplot)
+
+In particular, I'd never heard of the `reorder()` command before and would 
+usually reorder the data frame for plotting manually.
+
+Here's how I would have normally done it:
+  
+
+{% highlight r %}
+## Notice the as.is = TRUE
+breadth_data <- read.table(textConnection("Stakeholder  Value
+                                          'Grantseekers'  0.90
+                                          'Donors'    0.89
+                                          'Community' 0.55
+                                          'Hurricane Relief Fund' 0.24
+                                          'Media' 0.19
+                                          'Employment Seekers'    0.12
+                                          'Affiliates'    0.10
+                                          'Youth' 0.09
+                                          'Women' 0.02
+                                          'Former Board Members'  0.01"), 
+                           header=TRUE, 
+                           as.is = TRUE)
+str(breadth_data)
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## 'data.frame':	10 obs. of  2 variables:
+##  $ Stakeholder: chr  "Grantseekers" "Donors" "Community" "Hurricane Relief Fund" ...
+##  $ Value      : num  0.9 0.89 0.55 0.24 0.19 0.12 0.1 0.09 0.02 0.01
+{% endhighlight %}
+
+Since the `Stakeholder` column in the data frame are factors, you can specify 
+the factors order for this data frame. Here, I've ordered it in ascending order 
+of `Value`.
+
+
+{% highlight r %}
+# reorder manually
+orderIdx <- order(breadth_data$Value)
+breadth_data <- breadth_data[orderIdx, ]
+breadth_data$Stakeholder <- factor(breadth_data$Stakeholder,
+                                   levels = breadth_data$Stakeholder,
+                                   labels = breadth_data$Stakeholder)
+levels(breadth_data$Stakeholder)
+{% endhighlight %}
+
+
+
+{% highlight text %}
+##  [1] "Former Board Members"  "Women"                
+##  [3] "Youth"                 "Affiliates"           
+##  [5] "Employment Seekers"    "Media"                
+##  [7] "Hurricane Relief Fund" "Community"            
+##  [9] "Donors"                "Grantseekers"
+{% endhighlight %}
+
+
+
+{% highlight r %}
+# plot
+library(ggplot2)
+ggplot(breadth_data, aes(x = Stakeholder, y = Value)) + 
+  geom_bar(stat = "identity") +
+  coord_flip() +
+  theme_bw()
+{% endhighlight %}
+
+![center](/images/2016-04-18-reordering-bar-charts-with-ggplot/unnamed-chunk-2-1.png)
+
+With the `reorder()` function, this whole process is simplified.  Let's start the whole 
+process again:
+
+
+{% highlight r %}
+breadth_data.new <- read.table(textConnection("Stakeholder  Value
+                                          'Grantseekers'  0.90
+                                              'Donors'    0.89
+                                              'Community' 0.55
+                                              'Hurricane Relief Fund' 0.24
+                                              'Media' 0.19
+                                              'Employment Seekers'    0.12
+                                              'Affiliates'    0.10
+                                              'Youth' 0.09
+                                              'Women' 0.02
+                                              'Former Board Members'  0.01"), 
+                               header=TRUE)
+breadth_data.new <- transform(breadth_data.new,
+                          Stakeholder = reorder(Stakeholder, Value))
+
+ggplot(breadth_data.new, aes(x = Stakeholder, y = Value)) +
+  geom_bar(stat = "identity") +
+  coord_flip() +
+  theme_bw()
+{% endhighlight %}
+
+![center](/images/2016-04-18-reordering-bar-charts-with-ggplot/unnamed-chunk-3-1.png)
+
