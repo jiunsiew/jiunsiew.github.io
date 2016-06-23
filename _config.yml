@@ -5,8 +5,8 @@ locale: en_UK
 description: Discoveries and encounters in the world of analytics (and R)
 logo: # site-logo.png
 search: true
-# url: http://localhost:4000
-url: https://jiunsiew.github.io
+# url: http://localhost:4000  # for dev
+url: https://jiunsiew.github.io  # live
 
 # Jekyll configuration
 
@@ -55,7 +55,7 @@ owner:
   weibo: #userid
   google:
     plus: #username
-    analytics:
+    analytics: UA-79774652-1
     verify:
     ad-client:
     ad-slot:
