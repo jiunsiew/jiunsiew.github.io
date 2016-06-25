@@ -3,7 +3,7 @@ layout: post
 title: "Comparing models with AIC and standard deviations:  the devil in the details"
 modified:
 categories: r
-excerpt:  
+excerpt: "Using AIC for model selection with R with different sample sizes warrants caution."
 tags: [R, statistics]
 comments: true
 share: true

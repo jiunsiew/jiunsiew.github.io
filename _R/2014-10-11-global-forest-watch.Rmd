@@ -3,7 +3,7 @@ layout: post
 title: "Global Forest Watch"
 modified:
 categories: General
-excerpt:  
+excerpt: "Global Forest Watch is quite an amazing interactive mapping website that monitors the state of forests worldwide."
 tags: [general]
 comments: true
 share: true

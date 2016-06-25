@@ -3,7 +3,7 @@ layout: post
 title: "How Politicians Poisoned Politics - FT article"
 modified:
 categories: General
-excerpt:  
+excerpt: "So data analytics isn't such a new profession after all--it was done by Florence Nightingale.  Rose diagrams and all..."
 tags: [general]
 comments: true
 share: true

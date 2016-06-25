@@ -25,9 +25,12 @@ $base-color         : #343434;
 $comp-color         : spin($base-color, 180); 
 $border-color       : #ddd;
 $white              : #fff;
-$black              : #A7C520; //#2B3A42; //#000; original
+$black              : #A7C520; //#000; original
 $accent-color       : $black;
 $link-color         : #222;
+$link-color-2       : #CDE855;  // used for underlined links 
+$archive-line-color : #F5F6D4;  // used to seperate entry elements in archive/front page
+// custom colours from https://color.adobe.com/Granny-Smith-Apple-color-theme-2313/
 
 $table-border-color           : $border-color;
 $table-border                 : 1px solid $table-border-color;

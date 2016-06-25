@@ -3,7 +3,7 @@ layout: post
 title: "Analysing solar PV with R Part 2: Data Munging"
 modified:
 categories: r
-excerpt:  
+excerpt: "The second part in a series on the process of data extraction and cleaning using solar PV data from the Australian Clean Energy Regulator."
 tags: [R, data munging]
 comments: true
 share: true

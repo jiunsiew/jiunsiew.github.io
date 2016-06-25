@@ -3,7 +3,7 @@ layout: post
 title: "ggplot express (1)"
 modified:
 categories: r
-excerpt:  
+excerpt: "Quick tips in ggplot-ing."
 tags: [R, ggplot, data visualisation]
 comments: true
 share: true

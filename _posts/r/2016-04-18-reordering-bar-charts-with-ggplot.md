@@ -3,7 +3,7 @@ layout: post
 title: "Reordering Bar Charts with ggplot"
 modified:
 categories: r
-excerpt:  "A simple way to reorder factors to use in bar charts + ggplot"
+excerpt:  "A simple way to reorder factors to use in bar charts + ggplot."
 tags: [R, ggplot, data visualisation]
 comments: true
 share: true

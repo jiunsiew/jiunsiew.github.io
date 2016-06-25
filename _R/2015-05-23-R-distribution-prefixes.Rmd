@@ -3,7 +3,7 @@ layout: post
 title: "R distribution prefixes - in plain English"
 modified:
 categories: r
-excerpt:  
+excerpt: "The A-Z of of distribution prefixes in R."
 tags: [R, statistics]
 comments: true
 share: true
@@ -13,7 +13,7 @@ date: 2015-05-23
 ---
 
 In R, probability distributions are prefixed by four different letters, namely 
-`d, p, q` and `r`>.  I've always found the help pages on these fairly hard to 
+`d, p, q` and `r`.  I've always found the help pages on these fairly hard to 
 understand mainly because the terminology used is not what I've been 
 taught--nothing wrong with that, just makes things a bit confusing.  
 
@@ -34,7 +34,7 @@ Another post that explains PDFs, CDFs and the quantile function is here:
 
 #### A simple example
 Let's say you have a Chi-squared distribution with one degree of freedom and you 
-want to find P(x < 3.84).  This is simply:
+want to find $P(x < 3.84)$.  This is simply:
 
 ```{r}
 pchisq(3.84,1)

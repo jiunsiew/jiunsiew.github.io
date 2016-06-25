@@ -3,7 +3,7 @@ layout: post
 title: "Exploratory Data Analysis with Plotly @ MelbURN"
 modified:
 categories: r
-excerpt:  
+excerpt: "A presentation on using Plotly to the Melbourne R Users Network."
 tags: [R, data visualisation]
 comments: true
 share: true
