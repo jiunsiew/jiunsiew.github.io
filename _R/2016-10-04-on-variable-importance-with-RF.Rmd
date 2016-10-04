@@ -4,7 +4,7 @@ title: "On Variable Importance with Random Forests"
 modified:
 categories: r
 excerpt: "Deciphering and defining variable importance values in the randomForest package"
-tags: [R, random forest]
+tags: [R, statistics, random forest]
 comments: true
 share: true
 image:

@@ -4,7 +4,7 @@ title: "On Variable Importance with Random Forests"
 modified:
 categories: r
 excerpt: "Deciphering and defining variable importance values in the randomForest package"
-tags: [R, random forest]
+tags: [R, statistics, random forest]
 comments: true
 share: true
 image:
@@ -103,15 +103,15 @@ importance(modelFit)
 
 {% highlight text %}
 ##                 setosa versicolor virginica MeanDecreaseAccuracy
-## Sepal.Length  7.119830  7.5497220  8.265221            11.169925
-## Sepal.Width   5.195345  0.9140304  3.999435             4.626126
-## Petal.Length 23.936516 35.4103356 27.545759            34.680518
-## Petal.Width  20.706746 31.3415373 28.951455            31.634409
+## Sepal.Length  6.229092  5.7545580  8.496986            10.302236
+## Sepal.Width   4.887143  0.4742304  4.022647             4.814656
+## Petal.Length 24.705474 33.5383855 30.101625            35.584410
+## Petal.Width  19.577738 30.8501436 29.714236            31.302276
 ##              MeanDecreaseGini
-## Sepal.Length        10.928226
-## Sepal.Width          2.328845
-## Petal.Length        43.223555
-## Petal.Width         42.788375
+## Sepal.Length         9.982175
+## Sepal.Width          2.439575
+## Petal.Length        46.139942
+## Petal.Width         40.746959
 {% endhighlight %}
 
 The importance table has one row for each predictor variable used.  The first
