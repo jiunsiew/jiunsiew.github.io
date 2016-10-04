@@ -38,5 +38,6 @@ knit_folder <- function(infolder, outfolder, figsfolder, cachefolder) {
     }
 }
 
+setwd("~/Documents/website_dev/jiunsiew.github.io/")
 knit_folder("_R", "_posts/r", "images/", "_caches/")
 #knit_folder("_R/drafts", "_drafts", "figs/drafts/")

@@ -13,11 +13,11 @@ date: 2015-05-23
 ---
 
 In R, probability distributions are prefixed by four different letters, namely 
-`d, p, q` and `r`.  I've always found the help pages on these fairly hard to 
+`d, p, q` and `r`. I've always found the help pages on these fairly hard to 
 understand mainly because the terminology used is not what I've been 
-taught--nothing wrong with that, just makes things a bit confusing.  
+taught--nothing wrong with that, just makes things a bit confusing. 
 
-If you're familiar with *PDF's* and *CDF's*, then here's the mapping from R help to more common language.
+If you're familiar with *PDF's* and *CDF's*, then here's the mapping from R help to more common language.
 
 Prefix |   R help descriptor        |   My interpretation
 ------ | ------------------------   | ---------------------------------------------------
@@ -34,7 +34,7 @@ Another post that explains PDFs, CDFs and the quantile function is here:
 
 #### A simple example
 Let's say you have a Chi-squared distribution with one degree of freedom and you 
-want to find \\( P(x < 3.84) \\).  This is simply:
+want to find \\( P(x < 3.84) \\). This is simply:
 
 
 {% highlight r %}
