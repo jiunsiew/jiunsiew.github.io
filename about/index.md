@@ -20,12 +20,13 @@ At the very least, I'll have a copy of it online.
 An engineer by training with a signal processing background, I have been doing 
 mathematical and statistical modelling work in lots of different sectors like 
 wireless communications, financial risk management in energy markets, energy forecasting 
-and website companies.  I currently with a highly talented data science team at 
+and website companies.  I currently work with a highly talented data science team at 
 [Hitwise](http://connexity.com/hitwise/) and have the privilege of saying that I really 
 love my job.
 
-I've used Matlab, Python, C but R stole my heart after I learnt I didn't have to pay, 
-got my head around the idea of a data-frame and discovered *plyr* and *ggplot2* :).
+I've used Matlab, Python, and C before but R stole my heart after I learnt I didn't have 
+to pay, got my head around the idea of a data-frame and discovered *RStudio*, *plyr* and 
+*ggplot2* :).
 
 I also have the privilege of helping run the Melbourne R Users Meetup Group, also known 
 as [MelbURN](http://www.meetup.com/MelbURN-Melbourne-Users-of-R-Network/).
