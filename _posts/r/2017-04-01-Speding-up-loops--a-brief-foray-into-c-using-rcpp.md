@@ -1,0 +1,196 @@
+---
+layout: post
+title: "Speeding up loops - a brief foray into C++ using Rcpp"
+modified:
+categories: r
+excerpt: "R + C = tremendous loop speeds, low dev time."
+tags: [R, C++]
+comments: true
+share: true
+image:
+  feature:
+date: 2017-04-01
+---
+  
+## Introduction
+One of the best things about R (and open source in general), is that you get to ride on the back of some really, really clever contributions of others.  For the `R` community, Hadley Wickham's [`ggplot`](http://ggplot2.org) and [`dplyr`](https://cran.r-project.org/web/packages/dplyr/index.html) packages are legendary.  However, one equally (in my opinion, at least) amazing package is  [`Rcpp`](http://www.rcpp.org), written by [Dirk Eddelbuettel](http://dirk.eddelbuettel.com).  
+
+Why is this such an amazing package?  In a nutshell, it allows `R` users to harness the power of C++ functions with comparative ease.  Developing C code is typically much more time consuming as the programmer has to worry about header files, libraries, compilers, and even memory allocation (the wonderful world of `malloc`).  High level programming level languages like `python` and `R` help ease these by handling or at least simplifying this process for you.  For scientific computing, this makes your life much easier as your limited cognitive powers and time can be devoted to improving your algorithm rather than worrying about things like memory leaks.  The trade off is that these high level programming languages are slow for certain things--in particular, loops.  
+
+
+## R + C++ = Rcpp
+Enter the Rcpp package.  This allows you to simply focus on your functions that require speed up in C++ and helps you with all the header files and other constructs to pass data between your R and C++ functions.  I recently had to use this at work to write a function that finds the closest matching row of one matrix with the row of another.  Since the data in each matrix was binary, I used the [Hamming distance](https://en.wikipedia.org/wiki/Hamming_distance) to determine similarity.  
+
+First I tried using the inbuilt `sapply` function and wrote a simple `R` function that took in two matrices.  The function returned a vector whose length the same number of rows as the first matrix and contained the indices of the closest matching row in the second matrix.  If there were ties, a row was selected at random.  Here's the R function that does that.
+
+
+{% highlight r %}
+#' Calculates the hamming distance between each row of two matrices and returns
+#' the row index of the second matrix that is most closely matched 
+#' the row of the first matrix.  Similarity is defined by the Hamming distance.
+getMinHammingDist <- function(x, y){
+  
+  # checks
+  if (ncol(x) != ncol(y)) stop("Number of columns must be equal")
+  
+  output <- rep(NA, nrow(x))
+  for (iR in 1:nrow(x)){
+    x.row <- x[iR, ]
+    tmp <- sapply(1:nrow(y), function(x) sum(xor(x.row, y[x, ])))
+    output[iR] <- nnet::which.is.max(-1*tmp)  # select row at random for ties
+  }
+  
+  return(output)
+  
+}
+{% endhighlight %}
+
+To test how this function would scale, I created tests matrices where the first matrix was of size \\((1000 \times 100)\\) and the second matrix was of size \\((10^n \times 100)\\) with \\(n\\) varying from 1 to 5.  In other words, the first matrix had a fixed size while the second matrix grew from 10 to 100,000 rows (this scenario closely mimicked the application in which I was intending to use this for).  First, I'll show the results of this test and get into the code after.
+
+![center](/images/2017-04-01-Speding-up-loops--a-brief-foray-into-c-using-rcpp/unnamed-chunk-2-1.png)
+
+The speed up here is obvious.  When the number of rows is 100,000, using the C++ function requires about 33.3 seconds, while the corresponding apply method uses 1162.6 seconds (almost 20 minutes!).  This should come as no surprise to C++ users--loops are one area where C++ excels and `R` (and `python` and MATLAB) all struggle with.
+
+The amazing thing is how simple the C++ function is.  Here's the code which I keep in a separate `.cpp` file.
+
+
+{% highlight cpp %}
+#include <Rcpp.h>
+using namespace Rcpp;
+
+// This is a simple example of exporting a C++ function to R. You can
+// source this function into an R session using the Rcpp::sourceCpp 
+// function (or via the Source button on the editor toolbar). Learn
+// more about Rcpp at:
+//
+//   http://www.rcpp.org/
+//   http://adv-r.had.co.nz/Rcpp.html
+//   http://gallery.rcpp.org/
+//
+
+
+// calculate the hamming distance between two binary matrices.  
+// To be used for two binary matrices.
+
+// [[Rcpp::export]]
+NumericMatrix hamming(NumericMatrix x, NumericMatrix y){
+  
+  // get the matrix dimensions
+  int xNrow = x.nrow();
+  int xNcol = x.ncol();
+  int yNrow = y.nrow();
+  int yNcol = y.ncol();
+  
+  // output--> rows correspond to rows in x, columns correspond to rows in y
+  NumericMatrix output(xNrow, yNrow);
+  
+  for (int iX = 0; iX < xNrow; iX++){
+    
+    for (int iY = 0; iY < yNrow; iY++){
+      output(iX, iY) = 0;
+      
+      for (int iC = 0; iC < xNcol; iC++){
+        output(iX, iY) += abs(x(iX, iC) - y(iY, iC));
+        
+        //Rprintf("\nx: %d\ty: %d\toutput: %d", x(iX, iC), y(iY, iC), output(iX, iY));
+      }
+      
+    }
+    
+  }
+  return output;
+}
+{% endhighlight %}
+
+The function essentially comprises three nested loops with the main calculation being the absolute value of the difference between two elements from both input matrices.  Other than than, the Rcpp magic happens behind the scenes with the `#include <Rcpp.h>` line right at the top and the `// [[Rcpp::export]]` comment to specify the function you want to use from `R`.  
+
+Note that to actually run the function upon compiling, you can also add the following lines to the end of the C++ file:
+
+
+{% highlight cpp %}
+// You can include R code blocks in C++ files processed with sourceCpp
+// (useful for testing and development). The R code will be automatically 
+// run after the compilation.
+//
+
+// /*** R
+// nC <- 5
+// nR.x <- 5
+// nR.y <- 3
+// 
+// x.mat <- matrix(data = sample.int(2, size = nC*nR.x, replace = TRUE)-1, ncol = nC)
+// y.mat <- matrix(data = sample.int(2, size = nC*nR.y, replace = TRUE)-1, ncol = nC)
+// 
+// print(x.mat)
+// print(y.mat)
+// 
+// hamming(x.mat, y.mat)
+//
+{% endhighlight %}
+
+To compile the C++ function you simply add a `sourceCpp` command to the top of your script.  Here's the code that ran the test above:  
+
+
+{% highlight r %}
+library(Rcpp)
+sourceCpp("hamming.cpp")
+
+# test
+set.seed(1002)
+nC <- 100
+nR.y <- 1000
+# the lapply way
+timings.all <- NULL
+# create binary matrix
+y.mat <- matrix(data = sample.int(2, size = nC*nR.y, replace = TRUE)-1, ncol = nC)
+  
+for (iX in 1:5){
+  # cat(paste0("\niX: ", iX))
+  
+  # create x matrix
+  x.mat <- matrix(data = sample.int(2, size = nC*10^iX, replace = TRUE)-1, ncol = nC)
+  
+  # the sapply way
+  st.sapply <- proc.time()
+  
+  minIdx <- getMinHammingDist(x.mat, y.mat)
+  
+  et.sapply <- proc.time()
+
+  timings.all <- dplyr::bind_rows(timings.all, 
+                                  data.frame(nY = nR.y, 
+                                             nX = 10^iX, 
+                                             elapsedTime = (et.sapply - st.sapply)[[3]], 
+                                             method = 'apply', 
+                                             stringsAsFactors = FALSE))
+  
+  ## the c++ way
+  st.c <- proc.time()
+  
+  minDist <- hamming(x.mat, y.mat)
+  minIdx <- sapply(1:nrow(minDist), 
+                   function(x) nnet::which.is.max(-1*minDist[x, ]))
+  
+  et.c <- proc.time()
+  
+  timings.all <- dplyr::bind_rows(timings.all, 
+                                  data.frame(nY = nR.y, 
+                                             nX = 10^iX, 
+                                             elapsedTime = (et.c - st.c)[[3]], # elapsed time only 
+                                             method = 'c++', 
+                                             stringsAsFactors = FALSE))
+  
+  rm(x.mat)
+  gc()
+}
+{% endhighlight %}
+
+## Conclusion
+For a simple problem like this, the run time gains were tremendous and with `Rcpp`, the development time was relatively very small.  The package itself is very well documented and even though it's not a full version 1.0 yet, it's well worth looking at if you've got bottlenecks in your code that use lots of loops.
+
+Here's a list of some resources for reference:
+  
+  * [The Rcpp webpage](http://www.rcpp.org)
+  * [Rcpp on CRAN](https://cran.r-project.org/web/packages/Rcpp/index.html)
+  * [Dirk Eddelbuettel's documentation on Rcpp itself](http://dirk.eddelbuettel.com/code/rcpp.html)
+  * [Using Rcpp with RStudio](https://support.rstudio.com/hc/en-us/articles/200486088-Using-Rcpp-with-RStudio)
