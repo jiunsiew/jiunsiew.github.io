@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer">
+    
+    <meta name="description" content="Discoveries and encounters in the world of analytics (and R)">
+    
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:domain" content="/">
+    
+    <meta name="twitter:image" content="/tn.png">
+    <meta name="twitter:title" property="og:title" itemprop="title name" content="The Hungry Wonderer">
+    <meta name="twitter:description" property="og:description" itemprop="description" content="Discoveries and encounters in the world of analytics (and R)">
+    <meta name="og:type" content="website">
+    <meta name="og:url" content="/">
+    <meta name="og:image" itemprop="image primaryImageOfPage" content="/tn.png">
+    
+    <title>The Hungry Wonderer</title>
+    <link rel="shortcut icon" href="/sam.ico" id="favicon">
+    <link rel="stylesheet" href="/css/style.css">
+    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Didact+Gothic">
+    
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+    
+    
+
+	
+	<link rel="stylesheet" href="/css/github-gist.css" rel="stylesheet" id="theme-stylesheet">
+	<script src="/js/highlight.pack.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+</head>
+
+</html>
+
+<body>
+	<div class="wrap">
+		
+		<div class="section top-menu"><p><a href="/posts">back</a> &#183;
+			<a href="/posts">writing</a>
+			
+			
+			&#183; <a href="/gallery">gallery</a>
+			&#183; <a href="/about">who?</a>
+			
+			&#183; <a href="/">main</a></p>
+		</div>
+		
+		<div class="section" id="title">
+			On Variable Importance with Random Forests
+		</div>
+		
+		<div class="section" id="content">
+			2016-10-04 &#183; 1428 words 
+			<div>
+				<span id="tag"><a href="/tags/r">R</a>
+				</span>
+				<span id="tag"><a href="/tags/statistics">statistics</a>
+				</span>
+				<span id="tag"><a href="/tags/random-forest">random forest</a>
+				</span>
+			</div><hr/><div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<p>One of the big challenges in predictive modelling is determining which variables to use as predictors. This challenge becomes particularly difficult when the number of possible predictors becomes very large, making manual exploratory methods or the more “traditional” forward/backward stepwise regression models impractical, particularly when interactions between variables need to be considered.</p>
+<p>One very practical and useful by-product of the random forest algorithm (and gradient boosting machines) is the <code>variable importance</code> which can be calculated as part of the model fitting process. It turns out that this metric comes in very handy in many practical settings for whittling a large number of possible predictors to a more manageable number.</p>
+<p>This post brings together (in a non-exhaustive way) the theory and definitions behind the calculation of this metric. I’ll be using the <a href="https://cran.r-project.org/web/packages/randomForest/index.html"><code>randomForest</code></a> package in R which is an implementation of Leo Brieman’s original algorithm.</p>
+<!-- ## Preliminaries 
+Before we get into what these importance measures are, let's first define some 
+notation and terms.
+
+
+### Note on terminology
+Given a typical linear model expression: 
+
+$$y = \sum_{i = 1}^n \alpha_i x_i$$
+
+the variable \\( y \\) is called a variety of things terms including 
+*predicted variable*, *dependent variable* and *target variable*.  Likewise, the 
+\\( x_i \\) terms are called the *predictor variables*, *independent variables* and 
+*covariates*.  These terms are used interchangeably throughout this post.
+-->
+</div>
+<div id="random-forest-workings" class="section level2">
+<h2>Random forest workings</h2>
+<p>Before we get into what these importance measures are, let’s first briefly recall how the random forest (RF) algorithm works.</p>
+<p>At the very heart of the random forest algorithm lies the decision trees–a whole <em>“forest”</em> of them in fact. Each tree in the forest is built using bootstrapped samples.</p>
+<!--
+> Each tree is constructed using a different bootstrap sample from the original 
+data. About one-third of the cases are left out of the bootstrap sample and not 
+used in the construction of the kth tree. 
+-->
+<p>The samples that are not included in the bootstrap are called <em>out of bag</em> (OOB) and can be used to calculate an OOB error estimate. Averaged over all cases, this OOB error is unbiased and is one of the attractive features of RF–it effectively does cross validation on the fly.</p>
+<p>More detailed descriptions on RF is very easily found; both [1] and [2] are good places to start.</p>
+<!--
+> Put each case left out in the construction of the kth tree down the kth tree 
+to get a classification. In this way, a test set classification is obtained for 
+each case in about one-third of the trees. At the end of the run, take j to be 
+the class that got most of the votes every time case n was oob. The proportion 
+of times that j is not equal to the true class of n averaged over all cases is 
+the oob error estimate. This has proven to be unbiased in many tests. 
+
+As an aside, this feature of random forest is partly why it has become so 
+popular as it circumvents the need for cross validation.
+-->
+</div>
+<div id="model-training-with-random-forest" class="section level2">
+<h2>Model Training with Random Forest</h2>
+<p>Let’s start with a very simple model fit using the ubiquitous <code>iris</code> dataset. Say we’re given the task of trying to predict <code>Species</code> and we’re not sure which are the best variables to pick (granted, in this case having only 4 independent variables is rather trivial but the concepts here should be generalisable). We can use the <code>randomForest</code> algorithm with the <code>importance</code> input variable set to <code>TRUE</code>.</p>
+<pre class="r"><code>library(randomForest)
+data(&quot;iris&quot;)
+
+modelFit &lt;- randomForest(Species ~ ., data = iris, importance = TRUE)
+importance(modelFit)</code></pre>
+<pre><code>##                 setosa versicolor virginica MeanDecreaseAccuracy
+## Sepal.Length  6.525696   7.436317  8.584830            11.189325
+## Sepal.Width   4.358875   1.114725  3.610586             4.782164
+## Petal.Length 21.797565  32.168361 27.698147            32.858900
+## Petal.Width  22.804614  32.309100 31.250786            33.808931
+##              MeanDecreaseGini
+## Sepal.Length         9.624923
+## Sepal.Width          2.458790
+## Petal.Length        43.698620
+## Petal.Width         43.525467</code></pre>
+<p>The importance table has one row for each predictor variable used. The first three columns are specific to this dataset and are related to each class of the predicted variable. Then, there are two columns which are the main columns of interest: <code>MeanDecreaseAccuracy</code> and <code>MeanDecreaseGini</code>.</p>
+<p>Lets go through each of these columns separately.</p>
+<div id="variable-importance-and-mean-decrease-accuracy" class="section level3">
+<h3>Variable Importance and Mean Decrease Accuracy</h3>
+<p>The values of the first three columns contain the <em>raw importance score</em> for each variable in each class. A description of how this is calculated is found in [1]:</p>
+<blockquote>
+<p>In every tree grown in the forest, put down the oob cases and count the number of votes cast for the correct class. Now randomly permute the values of variable m in the oob cases and put these cases down the tree. Subtract the number of votes for the correct class in the variable-m-permuted oob data from the number of votes for the correct class in the untouched oob data. The average of this number over all trees in the forest is the raw importance score for variable m.</p>
+</blockquote>
+<p>In other words, for every tree, two sets of predictions are computed and compared. The first prediction is the OOB prediction as described above. The second prediction is generated using a <strong><em>random permutation</em></strong> of the values in each predictor variable. The raw importance score is the average difference between the number of correctly classified samples of these two predictions in each class. The final reported scores are normalised by the standard deviation of the differences [3].</p>
+<p>To get the Mean Decrease Accuracy the raw importance scores are averaged across all classes and normalised.</p>
+<p>Two important things to note here about this metric are:</p>
+<ol style="list-style-type: decimal">
+<li>It is calculated relative to a random permutation in the OOB samples</li>
+<li>It is based on prediction accuracy.</li>
+</ol>
+<p>It is also worth noting a couple of things:</p>
+<ol style="list-style-type: decimal">
+<li>A key assumption in the calculation of the standard deviation of accuracy differences is that the raw importance scores between trees are independent [1].</li>
+<li>For regression, the error metric used is the Mean Square Error.</li>
+<li>To get the un-normalised scores, set <code>scale = FALSE</code> in the <code>importance</code> function call.</li>
+</ol>
+</div>
+<div id="mean-decreases-gini" class="section level3">
+<h3>Mean Decreases Gini</h3>
+<p>To understand this metric, first let’s define the Gini index. Since RF’s are based on decision trees, we can define the proportion of class \( k \) observations in node \(m\) by [2, pg 309]:</p>
+<p><span class="math display">\[\hat{p}_{mk} = \frac{1}{N_m} \sum_{x_i \in R_m} I\left(y_i = k\right)\]</span></p>
+<p>where \( R_m \) is the region represented by node \( m \) and \(N_m\) is the number of observations in node \(m\).</p>
+<p>The Gini index is thus defined as:</p>
+<p><span class="math display">\[Gini = \sum_{k=1}^K \hat{p}_{mk}(1-\hat{p}_{mk})\]</span></p>
+<p>The equation above simply calculates the <strong><em>node impurity</em></strong> by splitting at node \(m\). Put simply, it’s a measure of how many classes are found in a region after splitting a node. If for example, the split separates all observations into one class, then \( _{mk} = 1\).</p>
+<p>With random forests, the Gini decrease is measured by comparing the Gini index before and after the node is split on a particular variable. This is then summed over all trees and averaged over variables to get the Mean decrease Gini [1]:</p>
+<!--
+> Every time a split of a node is made on variable m the gini impurity criterion 
+for the two descendent nodes is less than the parent node. Adding up the gini 
+decreases for each individual variable over all trees in the forest gives a fast 
+variable importance that is often very consistent with the permutation 
+importance measure.
+-->
+<p>Again, for regression, the process is the same except that the Gini index is replaced by the residual sum of squares [3].</p>
+</div>
+</div>
+<div id="application" class="section level2">
+<h2>Application</h2>
+<p>How would you use this in real-world settings? Using the RF model, you could simply use all your predictors and rank their importance using either the accuracy or node impurity metrics above. Depending on your application, you could then look at selected only a subset of variables from your original lists. You should of course do the model refitting with these variable subsets with cross-validation (if you’re using another algorithm) to get a sense of the error rates of your final model.</p>
+<p>One limitation to be aware of is the correlation between predictors since the variance of RF models with non-independent predictors is lower bounded by the positive pairwise correlation (see Equation 15.1 in [2]).</p>
+</div>
+<div id="tldr-also-know-as-a-conclusion" class="section level2">
+<h2>TL;DR (also know as a conclusion)</h2>
+<p>To sum up, you can use the RF model to whittle a large number of predictors to a much smaller set with the Mean Decrease Gini or Mean Decrease Accuracy.</p>
+<p>The accuracy metric is calculated relative to a random permutation of values in the OOB samples and normalised by standard deviation of the differences.</p>
+<p>The Gini metric is calculated based on the decrease in node impurity by splitting on a variable.</p>
+<p>Once you’ve selected your important variables, be sure to fit your model again using cross validation to get a good sense of how genarlisable your model is.</p>
+</div>
+<div id="references" class="section level2">
+<h2>References</h2>
+<p>[1] “Random forests - classification description”, <em>Stat.berkeley.edu, 2016.</em> [Online]. Available: <a href="https://www.stat.berkeley.edu/~breiman/RandomForests/cc_home.htm" class="uri">https://www.stat.berkeley.edu/~breiman/RandomForests/cc_home.htm</a>. [Accessed: 03- Oct- 2016].</p>
+<p>[2] T. Hastie, R. Tibshirani and J. Friedman, <em>The elements of statistical learning.</em>, 2nd ed.</p>
+<p>[3] A. Liaw and M. Wiener, <em>Package ‘randomForest’; Breiman and Cutler’s Random Forest for Classification and Regression</em>, v4.6-12, 2015-10-06. Available: <a href="https://cran.r-project.org/web/packages/randomForest/randomForest.pdf" class="uri">https://cran.r-project.org/web/packages/randomForest/randomForest.pdf</a></p>
+</div>
+
+		</div>
+		
+		<div class="section bottom-menu"><hr/><p><a href="/posts">back</a> &#183;
+			<a href="/posts">writing</a>
+			
+			
+			&#183; <a href="/gallery">gallery</a>
+			&#183; <a href="/about">who?</a>
+			
+			&#183; <a href="/">main</a></p>
+		</div>
+		 
+		<div class="section footer">
+			Discoveries and encounters in the world of analytics (and R)
+<script src="//yihui.name/js/math-code.js"></script>
+<script async
+src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+		</div>
+	</div>
+</body>

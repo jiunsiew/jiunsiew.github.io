@@ -1,0 +1,46 @@
+baseurl                 = "/"               # Your domain name. Must end with "/"
+languageCode            = "en-uk"
+title                   = "The Hungry Wonderer"
+theme                   = "hugo-theme-sam"
+pygmentsStyle           = "manni"                     # https://help.farbox.com/pygments.html
+pygmentsCodefences      = true
+# googleAnalytics       = "xxx"             # Tracking code, eg. "UA-111111111-1"
+ignoreFiles             = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
+
+[params]
+    # dateform            = "Mon Jan 02, 2006"
+    # dateformfull        = "Mon Jan 2 2006 15:04:05 EST"
+    dateform            = "2006-01-02"
+    dateformfull        = "2006-01-02 15:04:05 EST"
+    ## favicon             = "/sam.ico"
+    homepage            = "main"                        # What to call the home page link
+    galleryFolder       = "images/"                     # Where you've put your images, after "/content/gallery/"
+    clickablePhotos     = true                          # Allow links to the full size images
+    footerText          = "Discoveries and encounters in the world of analytics (and R)"
+
+# Metadata
+    description         = "Discoveries and encounters in the world of analytics (and R)"            # Max 160 characters show in search results
+    twitterCard         = "summary_large_image"         # Card value “summary”, “summary_large_image”, “app”, or “player”
+    ## primaryImage        = "/tn.png"                     # Image that shows on Twitter cards and OpenGraph links
+    
+    ## from https://amber.rbind.io/blog/2017/11/15/syntax-highlighting/
+    highlightjsVersion  = "9.11.0"
+    highlightjsCDN      = "//cdn.bootcss.com"
+    highlightjsLang     = ["r", "yaml"]
+    highlightjsTheme    = "github"
+
+    MathJaxCDN          = "//cdn.bootcss.com"
+    MathJaxVersion      = "2.7.1"
+
+[[params.mainMenu]]
+    link = "/posts"
+    text = "analytics"
+
+# [[params.mainMenu]]
+#     link = "/gallery"
+#     text = "gallery"
+
+[[params.mainMenu]]
+    link = "/about"
+    text = "who?"
+    

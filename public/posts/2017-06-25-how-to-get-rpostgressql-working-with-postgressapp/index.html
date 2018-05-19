@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer">
+    
+    <meta name="description" content="Discoveries and encounters in the world of analytics (and R)">
+    
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:domain" content="/">
+    
+    <meta name="twitter:image" content="/tn.png">
+    <meta name="twitter:title" property="og:title" itemprop="title name" content="The Hungry Wonderer">
+    <meta name="twitter:description" property="og:description" itemprop="description" content="Discoveries and encounters in the world of analytics (and R)">
+    <meta name="og:type" content="website">
+    <meta name="og:url" content="/">
+    <meta name="og:image" itemprop="image primaryImageOfPage" content="/tn.png">
+    
+    <title>The Hungry Wonderer</title>
+    <link rel="shortcut icon" href="/sam.ico" id="favicon">
+    <link rel="stylesheet" href="/css/style.css">
+    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Didact+Gothic">
+    
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+    
+    
+
+	
+	<link rel="stylesheet" href="/css/github-gist.css" rel="stylesheet" id="theme-stylesheet">
+	<script src="/js/highlight.pack.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+</head>
+
+</html>
+
+<body>
+	<div class="wrap">
+		
+		<div class="section top-menu"><p><a href="/posts">back</a> &#183;
+			<a href="/posts">writing</a>
+			
+			
+			&#183; <a href="/gallery">gallery</a>
+			&#183; <a href="/about">who?</a>
+			
+			&#183; <a href="/">main</a></p>
+		</div>
+		
+		<div class="section" id="title">
+			How to get RPostgresSQL working with Postgres.app
+		</div>
+		
+		<div class="section" id="content">
+			2017-06-25 &#183; 646 words 
+			<div>
+				<span id="tag"><a href="/tags/r">R</a>
+				</span>
+				<span id="tag"><a href="/tags/sql">SQL</a>
+				</span>
+				<span id="tag"><a href="/tags/postgres">Postgres</a>
+				</span>
+				<span id="tag"><a href="/tags/open-source">open source</a>
+				</span>
+			</div><hr/><div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<p>On a recent whim, I decided to upgrade to the latest version of <code>dplyr</code> to version 0.7.0 without doing much prior reading into the changes that were made. As a result, I very quickly discovered the database connections that were once in-built had been abstracted to another package called <code>dbplyr</code>, resulting in some strange errors. “No worries”, I thought as I then just installed that package.</p>
+<p>Re-running some code that connected to a local Postgres database provided some very frustrating errors. “No worries”, I thought to myself again, and proceeded to then upgrade my version of R to version 3.4.0, only to be met with the same frustrating errors of not being able to connect to my database due to some errors with the <code>RPostgresSQL</code> package.</p>
+<p>I was eventually able to get everything back up and running but only after having to dig into the source code of <code>RPostgresSQL</code> and recompiling it. The steps I had to go through are outlined below.</p>
+<p>Reflecting on this excercise (or ordeal, if you will), it dawned on me that this was a really good example of the benefits and drawbacks of open source software and thought I’d opine a bit on this issue.</p>
+<p>But first, the technical bits…</p>
+</div>
+<div id="when-all-else-fails-look-at-the-source" class="section level2">
+<h2>When all else fails, look at the source</h2>
+<p>If you happen to use macOS and want to use Postgres, you’ll very quickly find that <a href="https://postgresapp.com">Postgres.app</a> is a very handy way to get started. It worked pretty much out-of-the-box with previous versions of <code>RPostgresSQL</code> and <code>dplyr</code>. I have no idea what changed but with <code>dplyr</code> version 0.7.0 and the abstraction of the database connections to <code>dbplyr</code>, the out-of-the-box functionality broke with <code>RPostgresSQL</code>.</p>
+<div id="whats-gone-wrong" class="section level3">
+<h3>What’s gone wrong?</h3>
+<p>Basically, <code>RPostgresSQL</code> was unable to find the Postgres executable files. By default, <code>RPostgresSQL</code> will search for the Postgres applications in <code>/usr/lib</code> or <code>/opt/lib</code> directories. The problem is that by default, <code>Postgres.app</code> is installed in the <code>/Applications</code> directory which is not in the search path of <code>RPostgresSQL</code>. The diagnosis of this problem was probably the hardest and most frustrating part but one clue did come from this <a href="https://iangow.wordpress.com/2011/04/23/installing-rpostgresql-with-r-2-13-on-a-mac/">blog post by Ian Gow</a>.</p>
+</div>
+<div id="so-how-do-you-fix-it" class="section level3">
+<h3>So, how do you fix it?</h3>
+<p>Well, <em>a</em> solution is to modify the source code, making sure that the path is added appropriately, and recompile the package. This is actually not as hard as it sounds and I was able to get everything working as before. Here are the steps I took to do that:</p>
+<ul>
+<li>First, download the source code from <a href="https://cran.r-project.org/web/packages/RPostgreSQL/index.html">CRAN</a>. You’ll want to download the <code>*.tar.gz</code> source code file. Save it to a local directory. I saved it to the default <code>~/Downloads</code> directory on my home drive.</li>
+<li>Then, fire up the Terminal and uncompress the file with the command: <code>tar xvzf RPostgreSQL_0.4-1.tar.gz</code> (I got version 0.4.1 which seems to have already been updated to v0.6.2 as of 2017-06-24).</li>
+<li>You now need to open up the <code>configure</code> file in the uncompressed directory.</li>
+<li>Look for the following bits of code:</li>
+</ul>
+<pre class="bash"><code>for dir in \
+    /usr/include \
+    /usr/include/pgsql \
+    /usr/include/postgresql \
+    /usr/local/include \ ...</code></pre>
+<ul>
+<li>Once you’ve found that (it was around line 2915 of the code version I got), add the location of the <code>Postgres.app</code> to the end of the list. I found two such loops and added the new location to both.</li>
+</ul>
+<pre class="bash"><code>for dir in \
+    /usr/include \
+    /usr/include/pgsql \
+    /usr/include/postgresql \
+    /usr/local/include \
+    ...
+    /Applications/Postgres.app/Contents/Versions/latest/include
+    do 
+ ...</code></pre>
+<ul>
+<li>Finally, re-install the R package with the newly modified file using the command:</li>
+</ul>
+<pre class="r"><code>install.packages(&quot;~/Downloads/RPostgreSQL&quot;, repos=NULL, type=&quot;source&quot;)</code></pre>
+<ul>
+<li>Problem solved.</li>
+</ul>
+<p>For me, the changes above were enough for me to get database connections working again. However, the comments to Ian Gow’s blog post above does provide a link to the <code>RPostgresSQL</code> <a href="https://code.google.com/archive/p/rpostgresql/issues/30">issue tracker</a> where there is another suggested fix which involves</p>
+<blockquote>
+<p>defin[ing] the full path for pg_config in the environment variable $PG_CONFIG…</p>
+</blockquote>
+<p>I didn’t try this as I was happy enough with the solution I got. Hope that helps…someone.</p>
+</div>
+</div>
+
+		</div>
+		
+		<div class="section bottom-menu"><hr/><p><a href="/posts">back</a> &#183;
+			<a href="/posts">writing</a>
+			
+			
+			&#183; <a href="/gallery">gallery</a>
+			&#183; <a href="/about">who?</a>
+			
+			&#183; <a href="/">main</a></p>
+		</div>
+		 
+		<div class="section footer">
+			Discoveries and encounters in the world of analytics (and R)
+<script src="//yihui.name/js/math-code.js"></script>
+<script async
+src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+		</div>
+	</div>
+</body>

@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>The Hungry Wonderer</title>
+    <link>/</link>
+    <description>Recent content on The Hungry Wonderer</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-uk</language>
+    <lastBuildDate>Thu, 08 Mar 2018 20:18:53 -0500</lastBuildDate>
+    
+	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Long Form Post</title>
+      <link>/posts_original/long-form-post/</link>
+      <pubDate>Thu, 08 Mar 2018 20:18:53 -0500</pubDate>
+      
+      <guid>/posts_original/long-form-post/</guid>
+      <description>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Cursus eget nunc scelerisque viverra. Quam vulputate dignissim suspendisse in est ante in nibh mauris. Pharetra magna ac placerat vestibulum lectus mauris. Eget lorem dolor sed viverra ipsum. Elementum nisi quis eleifend quam adipiscing. Aliquet nec ullamcorper sit amet risus. Auctor neque vitae tempus quam pellentesque. Tincidunt lobortis feugiat vivamus at augue.</description>
+    </item>
+    
+    <item>
+      <title>Code Poetry</title>
+      <link>/posts_original/code-poetry/</link>
+      <pubDate>Tue, 13 Feb 2018 13:56:12 -0500</pubDate>
+      
+      <guid>/posts_original/code-poetry/</guid>
+      <description>Pseudo code poem.
+if (this === that): try write_new_poem() except not_a_poet as e: return </description>
+    </item>
+    
+    <item>
+      <title>About</title>
+      <link>/about/</link>
+      <pubDate>Tue, 13 Feb 2018 13:42:49 -0500</pubDate>
+      
+      <guid>/about/</guid>
+      <description>The main reason for this blog I forget easily. This is a repository about my discoveries in all things related to data analytics, and the so called science behind it.
+Writing about it will hopefully help me remember something. At the very least, I&amp;rsquo;ll have a copy of it online.
+The main reason for this page An engineer by training with a signal processing background, I have been doing mathematical and statistical modelling work in lots of different sectors like wireless communications, financial risk management in energy markets, energy forecasting and website companies.</description>
+    </item>
+    
+    <item>
+      <title>About</title>
+      <link>/about_original/</link>
+      <pubDate>Tue, 13 Feb 2018 13:42:49 -0500</pubDate>
+      
+      <guid>/about_original/</guid>
+      <description>Hello, I&amp;rsquo;m Sam. I&amp;rsquo;m a theme for Hugo. I&amp;rsquo;m an extremely customizable, content-focused theme that lets you showcase your work your way.
+I have slick minimalist templates for list pages (such as a list of blog posts) and single pages (a page to read one blog post). You can use tags on your content, and view content by tags.
+I also have a simple responsive gallery built with CSS grid. It&amp;rsquo;ll look great on any screen, and all you have to do is provide a folder of images.</description>
+    </item>
+    
+    <item>
+      <title>Dear Jane, regarding Mr. Bennet</title>
+      <link>/posts_original/dear-jane/</link>
+      <pubDate>Sun, 11 Feb 2018 12:34:41 -0500</pubDate>
+      
+      <guid>/posts_original/dear-jane/</guid>
+      <description>Chapter One It is a truth universally acknowledged, that a single man in possession of a good fortune, must be in want of a wife.
+However little known the feelings or views of such a man may be on his first entering a neighbourhood, this truth is so well fixed in the minds of the surrounding families, that he is considered the rightful property of some one or other of their daughters.</description>
+    </item>
+    
+    <item>
+      <title>Oh, Alice</title>
+      <link>/posts_original/oh-alice/</link>
+      <pubDate>Fri, 09 Feb 2018 12:32:12 -0500</pubDate>
+      
+      <guid>/posts_original/oh-alice/</guid>
+      <description>Nor did such soothing scenes, however temporary, fail of at least as temporary an effect on Ahab. But if these secret golden keys did seem to open in him his own secret golden treasuries, yet did his breath upon them prove but tarnishing. Alice opened the door and found that it led into a small passage, not much larger than a rat-hole: she knelt down and looked along the passage into the loveliest garden you ever saw.</description>
+    </item>
+    
+    <item>
+      <title>A Poem</title>
+      <link>/posts_original/a-poem/</link>
+      <pubDate>Thu, 01 Feb 2018 12:35:11 -0500</pubDate>
+      
+      <guid>/posts_original/a-poem/</guid>
+      <description>Now pleasing sleep had seal&amp;rsquo;d each mortal eye,
+Stretch&amp;rsquo;d in the tents the Grecian leaders lie:
+The immortals slumber&amp;rsquo;d on their thrones above;
+All, but the ever-wakeful eyes of Jove.(76)
+To honour Thetis&amp;rsquo; son he bends his care,
+And plunge the Greeks in all the woes of war:
+Then bids an empty phantom rise to sight,
+And thus commands the vision of the night.
+&amp;ldquo;Fly hence, deluding Dream! and light as air,(77)</description>
+    </item>
+    
+    <item>
+      <title>How to get RPostgresSQL working with Postgres.app</title>
+      <link>/posts/2017-06-25-how-to-get-rpostgressql-working-with-postgressapp/</link>
+      <pubDate>Sun, 25 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/2017-06-25-how-to-get-rpostgressql-working-with-postgressapp/</guid>
+      <description>IntroductionOn a recent whim, I decided to upgrade to the latest version of dplyr to version 0.7.0 without doing much prior reading into the changes that were made. As a result, I very quickly discovered the database connections that were once in-built had been abstracted to another package called dbplyr, resulting in some strange errors. “No worries”, I thought as I then just installed that package.
+Re-running some code that connected to a local Postgres database provided some very frustrating errors.</description>
+    </item>
+    
+    <item>
+      <title>Open source, R and things to consider</title>
+      <link>/posts/2017-07-01-open-source-and-r/</link>
+      <pubDate>Sun, 25 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/2017-07-01-open-source-and-r/</guid>
+      <description>IntroductionBeing one of the organisers of the Melbourne Users of R Network, I often get asked about how R might be used in organisations and how to provide IT admins comfort that R isn’t going to take down their whole system or infect their computers with bad libraries and unsupported code. After fixing the issue at hand (and the frustration had subsided), it dawned on me that this was a good example of both the good and bad of open source software and the types of things people and organisations who are going looking at adopting R or python for analytics might want to consider.</description>
+    </item>
+    
+    <item>
+      <title>New York Philharmonic Performances</title>
+      <link>/posts/2016-10-16-newyork-philharmonic-performance/</link>
+      <pubDate>Sun, 16 Oct 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/2016-10-16-newyork-philharmonic-performance/</guid>
+      <description>The New York Philharmonic Performance DatasetOne of the really great things about listening to the FiveThirtyEight podcast is that you sometimes come across some very interesting data sets. In one episode, they interviewed Barbara Haws–the archivist/historian, of the New York Philharmonic Orchestra from which I learnt that their complete performance history dating back to 1842 is on Github!
+Data and music are two things I really love, so it wasn’t long before I started digging into the data.</description>
+    </item>
+    
+    <item>
+      <title>On Variable Importance with Random Forests</title>
+      <link>/posts/2016-10-04-on-variable-importance-with-rf/</link>
+      <pubDate>Tue, 04 Oct 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/2016-10-04-on-variable-importance-with-rf/</guid>
+      <description>IntroductionOne of the big challenges in predictive modelling is determining which variables to use as predictors. This challenge becomes particularly difficult when the number of possible predictors becomes very large, making manual exploratory methods or the more “traditional” forward/backward stepwise regression models impractical, particularly when interactions between variables need to be considered.
+One very practical and useful by-product of the random forest algorithm (and gradient boosting machines) is the variable importance which can be calculated as part of the model fitting process.</description>
+    </item>
+    
+    <item>
+      <title>Hello world</title>
+      <link>/posts/2016-06-03-hello-world/</link>
+      <pubDate>Thu, 23 Jun 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/2016-06-03-hello-world/</guid>
+      <description>A new blog&amp;hellip;again Given that most of my posts are now quite programming centric, I&amp;rsquo;ve decided to move away from the world of CMS (Wordpress) and into the a slightly more streamlined approached of using markdown files with R, RStudio and R Markdown.
+Why move?  I recently discovered a number of R bloggers using websites powered by Jekyll and Github.com and am hoping that the workflow will be better.</description>
+    </item>
+    
+    <item>
+      <title>Exploratory Data Analysis with Plotly @ MelbURN</title>
+      <link>/posts/2016-05-30-exploratory-data-analysis-with-plotly/</link>
+      <pubDate>Mon, 30 May 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/2016-05-30-exploratory-data-analysis-with-plotly/</guid>
+      <description>I recently had the honour of presenting at the Melbourne User of R Network (MelbURN) where I presented on the R package plotly.
+In this presentation, I compared doing some exploratory data analysis with Plotly using the performance data of the New York Philharmonic Orchestra (which is publically available here).
+The presentation can be found here and is best viewed with Chrome or Safari: http://jiunsiew.github.io/plotly_presentation/
+The main point of the talk is really that Plotly plots can be really powerful, primarily because of its interactivity capabilities.</description>
+    </item>
+    
+    <item>
+      <title>How Politicians Poisoned Politics - FT article</title>
+      <link>/posts/2016-04-20-how-politicians-poisoned-politics-ft/</link>
+      <pubDate>Wed, 20 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/2016-04-20-how-politicians-poisoned-politics-ft/</guid>
+      <description>This past weekend, there was a pretty interesting article in the Financial Times on the somewhat liberal use of statistics by politicians.
+Here are some highlights that I thought were worth capturing:
+Frankfurt concluded that the difference between the liar and the bullshitter was that the liar cared about the truth — cared so much that he wanted to obscure it — while the bullshitter did not. The bullshitter, said Frankfurt, was indifferent to whether the statements he uttered were true or not.</description>
+    </item>
+    
+    <item>
+      <title>Reordering Bar Charts with ggplot</title>
+      <link>/posts/2016-04-18-reordering-bar-charts-with-ggplot/</link>
+      <pubDate>Mon, 18 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/2016-04-18-reordering-bar-charts-with-ggplot/</guid>
+      <description>Found this solution on stack overflow and it was brilliant!
+http://stackoverflow.com/questions/5967593/ordering-of-bars-in-ggplot
+In particular, I’d never heard of the reorder() command before and would usually reorder the data frame for plotting manually.
+Here’s how I would have normally done it:
+## Notice the as.is = TRUEbreadth_data &amp;lt;- read.table(textConnection(&amp;quot;Stakeholder Value&amp;#39;Grantseekers&amp;#39; 0.90&amp;#39;Donors&amp;#39; 0.89&amp;#39;Community&amp;#39; 0.55&amp;#39;Hurricane Relief Fund&amp;#39; 0.24&amp;#39;Media&amp;#39; 0.19&amp;#39;Employment Seekers&amp;#39; 0.12&amp;#39;Affiliates&amp;#39; 0.10&amp;#39;Youth&amp;#39; 0.09&amp;#39;Women&amp;#39; 0.02&amp;#39;Former Board Members&amp;#39; 0.</description>
+    </item>
+    
+    <item>
+      <title>Hello R Markdown</title>
+      <link>/posts/2015-07-23-r-rmarkdown/</link>
+      <pubDate>Thu, 23 Jul 2015 21:13:14 -0500</pubDate>
+      
+      <guid>/posts/2015-07-23-r-rmarkdown/</guid>
+      <description>R MarkdownThis is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
+You can embed an R code chunk like this:
+summary(cars)## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 26.00 ## Median :15.0 Median : 36.00 ## Mean :15.4 Mean : 42.98 ## 3rd Qu.</description>
+    </item>
+    
+    <item>
+      <title>R distribution prefixes - in plain English</title>
+      <link>/posts/2015-05-23-r-distribution-prefixes/</link>
+      <pubDate>Sat, 23 May 2015 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/2015-05-23-r-distribution-prefixes/</guid>
+      <description>In R, probability distributions are prefixed by four different letters, namely d, p, q and r. I’ve always found the help pages on these fairly hard to understand mainly because the terminology used is not what I’ve been taught–nothing wrong with that, just makes things a bit confusing.
+If you’re familiar with PDF’s and CDF’s, then here’s the mapping from R help to more common language.
+PrefixR help descriptorMy interpretationddensityProbability Density Function (PDF)pdistribution functionCumulative Distribution Function (CDF)qquantile functionInverse CDFrgenerate random deviatesDraw random samples from the specified distributionA really good reference for this is found here: http://www.</description>
+    </item>
+    
+    <item>
+      <title>ggplot express (1)</title>
+      <link>/posts/2015-01-10-ggplot-express-1/</link>
+      <pubDate>Sat, 10 Jan 2015 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/2015-01-10-ggplot-express-1/</guid>
+      <description>Here are some code snippets with ggplot that I use very often but forget equally as much.
+# to set the theme so you don&amp;#39;t have to keep typing &amp;quot;+ theme_bw()&amp;quot;theme_set(theme_bw())# to rotate the x-axis labelstheme(axis.text.x = element_text(angle = 90, hjust = 1))# to put the legend at the bottom/top/wherevertheme(legend.position = &amp;#39;bottom&amp;#39;) # or wherever you want--see the help# to stack the legend icons and position the legend titleguides(col = guide_legend(ncol = 7, title.</description>
+    </item>
+    
+    <item>
+      <title>Analysing solar PV with R Part 2: Data Munging</title>
+      <link>/posts/2014-11-01-analysing-solar-pv-with-r-2/</link>
+      <pubDate>Sat, 01 Nov 2014 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/2014-11-01-analysing-solar-pv-with-r-2/</guid>
+      <description>FlashbackThis is the second post in a series on analysing rooftop PV solar using R. In the first post, I spilt a lot of digital ink on how to setup the project. A slow start perhaps, but in this post, we’ll look at something more directly R related.
+In particular, I’ll cover how to get data from Excel into R, and tidy it up into a format that makes things easier to analyse later.</description>
+    </item>
+    
+    <item>
+      <title>Analysing solar PV with R Part 1: Setup</title>
+      <link>/posts/2014-10-22-analysing-solar-pv-with-r-1/</link>
+      <pubDate>Wed, 22 Oct 2014 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/2014-10-22-analysing-solar-pv-with-r-1/</guid>
+      <description>Doing data analysis is quite often much more than just doing fancy algorithms and visualisations. There’s typically a lot of background data minging (no that’s not a typo) work that needs to be done, particularly if you’re intending to sustain your code over a period of time and share it with others. I thought I’d write a bit about this whole workflow by doing a series of post analysing the amount of residential rooftop solar PV in Australia.</description>
+    </item>
+    
+    <item>
+      <title>Global Forest Watch</title>
+      <link>/posts/2014-10-11-global-forest-watch/</link>
+      <pubDate>Sat, 11 Oct 2014 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/2014-10-11-global-forest-watch/</guid>
+      <description>Came across this website today called Global Forest Watch. It’s got some really great mapping visuals. Having dabbled in a bit of mapping in R, the graphics that this site has is really, really amazing.
+I tried simple zooming in on Malaysia, Indonesia and Singapore and was quite surprised to see a fair bit of tree cover gain, about 9.7 million hectares to be exact. Sadly, the amount of loss was almost twice that at about 18.</description>
+    </item>
+    
+  </channel>
+</rss>
