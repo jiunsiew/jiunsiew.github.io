@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>/about/</loc>
+    <lastmod>2018-02-13T13:42:49-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/</loc>
+    <lastmod>2018-02-13T12:21:57-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/2017-07-01-open-source-and-r/</loc>
+    <lastmod>2017-07-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/2017-06-25-how-to-get-rpostgressql-working-with-postgressapp/</loc>
+    <lastmod>2017-06-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/2017-04-01-speding-up-loops--a-brief-foray-into-c-using-rcpp/</loc>
+    <lastmod>2017-04-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/2016-10-16-newyork-philharmonic-performance/</loc>
+    <lastmod>2016-10-16T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/2016-10-04-on-variable-importance-with-rf/</loc>
+    <lastmod>2016-10-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/2016-06-03-hello-world/</loc>
+    <lastmod>2016-06-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/2016-05-30-exploratory-data-analysis-with-plotly/</loc>
+    <lastmod>2016-05-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/2016-04-20-how-politicians-poisoned-politics-ft/</loc>
+    <lastmod>2016-04-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/2016-04-18-reordering-bar-charts-with-ggplot/</loc>
+    <lastmod>2016-04-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/2015-05-23-r-distribution-prefixes/</loc>
+    <lastmod>2015-05-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/2015-01-10-ggplot-express-1/</loc>
+    <lastmod>2015-01-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/2014-11-01-analysing-solar-pv-with-r-2/</loc>
+    <lastmod>2014-11-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/2014-10-22-analysing-solar-pv-with-r-1/</loc>
+    <lastmod>2014-10-22T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/2014-10-11-global-forest-watch/</loc>
+    <lastmod>2014-10-11T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/c&#43;&#43;/</loc>
+    <lastmod>2017-04-01T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/categories/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/data-munging/</loc>
+    <lastmod>2014-11-01T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/data-visualisation/</loc>
+    <lastmod>2016-10-16T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/general/</loc>
+    <lastmod>2016-06-23T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/categories/general/</loc>
+    <lastmod>2016-06-23T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/ggplot/</loc>
+    <lastmod>2016-04-18T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/open-source/</loc>
+    <lastmod>2017-07-01T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/gallery/</loc>
+  </url>
+  
+  <url>
+    <loc>/tags/postgres/</loc>
+    <lastmod>2017-06-25T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/r/</loc>
+    <lastmod>2017-07-01T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/categories/r/</loc>
+    <lastmod>2017-07-01T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/random-forest/</loc>
+    <lastmod>2016-10-04T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/sql/</loc>
+    <lastmod>2017-06-25T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/statistics/</loc>
+    <lastmod>2016-10-04T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2017-04-01T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/</loc>
+    <lastmod>2018-02-13T13:42:49-05:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+</urlset>

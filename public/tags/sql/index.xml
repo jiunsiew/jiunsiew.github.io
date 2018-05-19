@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Sql on The Hungry Wonderer</title>
+    <link>/tags/sql/</link>
+    <description>Recent content in Sql on The Hungry Wonderer</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-uk</language>
+    <lastBuildDate>Sun, 25 Jun 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/sql/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>How to get RPostgresSQL working with Postgres.app</title>
+      <link>/posts/2017-06-25-how-to-get-rpostgressql-working-with-postgressapp/</link>
+      <pubDate>Sun, 25 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/2017-06-25-how-to-get-rpostgressql-working-with-postgressapp/</guid>
+      <description>IntroductionOn a recent whim, I decided to upgrade to the latest version of dplyr to version 0.7.0 without doing much prior reading into the changes that were made. As a result, I very quickly discovered the database connections that were once in-built had been abstracted to another package called dbplyr, resulting in some strange errors. “No worries”, I thought as I then just installed that package.
+Re-running some code that connected to a local Postgres database provided some very frustrating errors.</description>
+    </item>
+    
+  </channel>
+</rss>

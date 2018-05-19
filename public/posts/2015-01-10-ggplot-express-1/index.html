@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer">
+    
+    <meta name="description" content="Discoveries and encounters in the world of analytics (and R)">
+    
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:domain" content="/">
+    
+    <meta name="twitter:image" content="/tn.png">
+    <meta name="twitter:title" property="og:title" itemprop="title name" content="The Hungry Wonderer">
+    <meta name="twitter:description" property="og:description" itemprop="description" content="Discoveries and encounters in the world of analytics (and R)">
+    <meta name="og:type" content="website">
+    <meta name="og:url" content="/">
+    <meta name="og:image" itemprop="image primaryImageOfPage" content="/tn.png">
+    
+    <title>The Hungry Wonderer</title>
+    <link rel="shortcut icon" href="/sam.ico" id="favicon">
+    <link rel="stylesheet" href="/css/style.css">
+    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Didact+Gothic">
+    
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+    
+    
+
+	
+	<link rel="stylesheet" href="/css/github-gist.css" rel="stylesheet" id="theme-stylesheet">
+	<script src="/js/highlight.pack.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+</head>
+
+</html>
+
+<body>
+	<div class="wrap">
+		
+		<div class="section top-menu"><p><a href="/posts">back</a> &#183;
+			<a href="/posts">analytics</a>
+			
+			
+			&#183; <a href="/about">who?</a>
+			
+			&#183; <a href="/">main</a></p>
+		</div>
+		
+		<div class="section" id="title">
+			ggplot express (1)
+		</div>
+		
+		<div class="section" id="content">
+			2015-01-10 &#183; 83 words 
+			<div>
+				<span id="tag"><a href="/tags/r">R</a>
+				</span>
+				<span id="tag"><a href="/tags/ggplot">ggplot</a>
+				</span>
+				<span id="tag"><a href="/tags/data-visualisation">data visualisation</a>
+				</span>
+			</div><hr/><p>Here are some code snippets with ggplot that I use very often but forget equally as much.</p>
+<pre class="r"><code># to set the theme so you don&#39;t have to keep typing &quot;+ theme_bw()&quot;
+theme_set(theme_bw())
+
+# to rotate the x-axis labels
+theme(axis.text.x = element_text(angle = 90, hjust = 1))
+
+# to put the legend at the bottom/top/wherever
+theme(legend.position = &#39;bottom&#39;)  # or wherever you want--see the help
+
+# to stack the legend icons and position the legend title
+guides(col = guide_legend(ncol = 7, title.position = &#39;top&#39;))</code></pre>
+
+		</div>
+		
+		<div class="section bottom-menu"><hr/><p><a href="/posts">back</a> &#183;
+			<a href="/posts">analytics</a>
+			
+			
+			&#183; <a href="/about">who?</a>
+			
+			&#183; <a href="/">main</a></p>
+		</div>
+		 
+		<div class="section footer">
+			Discoveries and encounters in the world of analytics (and R)
+<script src="//yihui.name/js/math-code.js"></script>
+<script async
+src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+		</div>
+	</div>
+</body>

@@ -1,0 +1,29 @@
+---
+title: "Open source, R and things to consider"
+author: "Jiun Siew"
+categories: ["R"]
+tags: ["R", "open source"]
+date: 2017-07-01
+showDate: true
+---
+
+
+
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<p>Being one of the organisers of the <a href="https://www.meetup.com/en-AU/MelbURN-Melbourne-Users-of-R-Network/">Melbourne Users of R Network</a>, I often get asked about how R might be used in organisations and how to provide IT admins comfort that R isn’t going to take down their whole system or infect their computers with bad libraries and unsupported code. After fixing the issue at hand (and the frustration had subsided), it dawned on me that this was a good example of both the good and bad of open source software and the types of things people and organisations who are going looking at adopting <code>R</code> or <code>python</code> for analytics might want to consider.</p>
+<p>In this case, the updates to <code>dplyr</code>, <code>dbplyr</code> would arguably have been less likely to be shipped without testing of other dependent packages like <code>RPostgresSQL</code>. Presumably, since development of both packages would have been done by the same company, it would be reasonable to assume that there is some quality assurance testing, although your mileage may vary. With R, and open source in general, packages or libaries are often developed independently which means that a change in one (<code>dplyr</code>) brakes another (<code>RPostgresSQL</code>).</p>
+<p>Having said that, bugs will inevitably still exists in proprietary software packages (despite what the salesperson says) and when they do occur, I would have been at the mercy of the vendor for a response to the issue, a possible workaround or fix, should one be so lucky. With open source software, I was instead able to do a bit of Googling, download the source code, make a few changes and have everything back up and running. I suspect the later versions that have now been released on CRAN would have also already fixed these issues.</p>
+<p>The upshot? All things considered, I think open source still has a very strong case. There are however, some guidelines which you might want to follow if you do so:</p>
+<ul>
+<li>When using open source software, you are in many ways assuming responsibility of the reliability of the software. If something breaks, the onus is on you to fix it. As such, you will need to be, or have people who are motivated and clever enough to try and fix problems themselves. In some organisations, assumption of this responsibility is too much to ask and so open source is a very risky proposition. In others, finding motivated and clever people is too big an ask in which case arguing about open source software is probably the least of your worries (been there, done that, don’t want the T-shirt).</li>
+<li>Use libraries or packages that are well supported and actively developed. In a previous workplace, we adopted the use of a deprecated numerical library and later found bugs in one of the functions we heavily relied on. As the library was deprecated, we had no way of fixing it ourselves (not to mention hours of time lost trying to find the bug in the first place).<br />
+</li>
+<li>For R, the existence of a repository like CRAN provides a lot of assurance and visibility to package development activity. Using packages from here and checking their development activity can go a long way in putting IT admins minds at ease.</li>
+<li>Wait before you update. I think this goes with just about any software but with open source, updates can be very often, particularly for R and their libraries. Having a good versioning system for code <strong>and</strong> packages is a really good idea. Packages like <a href="https://rstudio.github.io/packrat/"><code>packrat</code></a> are worth investigating if you’re planning on productionising your code/models/dashboards.</li>
+</ul>
+</div>
+<div id="conclusion" class="section level2">
+<h2>Conclusion</h2>
+<p>In summary, a few tweaks to the source code for <code>RPostgresSQL</code> was sufficient for me to get my database connections back up and running. It was also a good lesson in using open source software and all things considered, I think it’s still a very good proposition. But that’s just me.</p>
+</div>

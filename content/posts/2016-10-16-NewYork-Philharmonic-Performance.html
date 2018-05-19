@@ -1,0 +1,117 @@
+---
+layout: post
+title: "New York Philharmonic Performances"
+author: "Jiun Siew"
+categories: ["R"]
+tags: ["R", "data visualisation"]
+date: 2016-10-16
+showDate: true
+---
+
+
+
+<div id="the-new-york-philharmonic-performance-dataset" class="section level2">
+<h2>The New York Philharmonic Performance Dataset</h2>
+<p>One of the really great things about listening to the <a href="http://fivethirtyeight.com/tag/whats-the-point/">FiveThirtyEight</a> podcast is that you sometimes come across some very interesting data sets. In one <a href="http://fivethirtyeight.com/features/take-a-trip-through-174-years-of-classical-music/">episode</a>, they interviewed Barbara Haws–the archivist/historian, of the New York Philharmonic Orchestra from which I learnt that their complete performance history dating back to 1842 is on <a href="https://github.com/nyphilarchive/PerformanceHistory">Github</a>!</p>
+<p>Data and music are two things I really love, so it wasn’t long before I started digging into the data.</p>
+<p><strong>A couple of disclamers</strong>:</p>
+<ul>
+<li><p>I presented some of this material to the Melbourne R Users Meetup group. But this post contains a more detailed analysis. For the presentation please see <a href="http://jiunsiew.github.io/plotly_presentation/">this link</a></p></li>
+<li><p>The data for this post was pulled in April this year, so 2016 data is very incomplete</p></li>
+</ul>
+<div id="data-preparation" class="section level3">
+<h3>Data preparation</h3>
+<p>The performance data is provided in XML files that cover various date ranges. Since the NY Philharmonic provided a Python script that did some XML extraction, I decided to use this as a code base to getting some data fields I was interested in. Specifically, I extracted date/time, location, composer and work data and saved it into a csv which I then imported into R. I then had to do some extra cleaning of the data–mainly cleaning up some composer names and the like.</p>
+<p>Here’s a quick snapshot of what the data looks like:</p>
+<pre><code>## Classes &#39;tbl_df&#39;, &#39;tbl&#39; and &#39;data.frame&#39;:    82311 obs. of  8 variables:
+##  $ programID   : int  3853 3853 3853 3853 3853 3853 3853 3853 3853 5178 ...
+##  $ date        : Date, format: &quot;1842-12-07&quot; &quot;1842-12-07&quot; ...
+##  $ Time        : chr  &quot;8:00PM&quot; &quot;8:00PM&quot; &quot;8:00PM&quot; &quot;8:00PM&quot; ...
+##  $ eventType   : chr  &quot;Subscription Season&quot; &quot;Subscription Season&quot; &quot;Subscription Season&quot; &quot;Subscription Season&quot; ...
+##  $ Location    : chr  &quot;Manhattan, NY&quot; &quot;Manhattan, NY&quot; &quot;Manhattan, NY&quot; &quot;Manhattan, NY&quot; ...
+##  $ Venue       : chr  &quot;Apollo Rooms&quot; &quot;Apollo Rooms&quot; &quot;Apollo Rooms&quot; &quot;Apollo Rooms&quot; ...
+##  $ composerName: chr  &quot;Beethoven,  Ludwig  van&quot; &quot;Weber,  Carl  Maria Von&quot; &quot;Hummel,  Johann&quot; NA ...
+##  $ workTitle   : chr  &quot;SYMPHONY NO. 5 IN C MINOR, OP.67&quot; &quot;OBERON&quot; &quot;QUINTET, PIANO, D MINOR, OP. 74&quot; NA ...
+##  - attr(*, &quot;spec&quot;)=List of 2
+##   ..$ cols   :List of 9
+##   .. ..$ X1          : list()
+##   .. .. ..- attr(*, &quot;class&quot;)= chr  &quot;collector_integer&quot; &quot;collector&quot;
+##   .. ..$ programID   : list()
+##   .. .. ..- attr(*, &quot;class&quot;)= chr  &quot;collector_integer&quot; &quot;collector&quot;
+##   .. ..$ date        :List of 1
+##   .. .. ..$ format: chr &quot;&quot;
+##   .. .. ..- attr(*, &quot;class&quot;)= chr  &quot;collector_date&quot; &quot;collector&quot;
+##   .. ..$ Time        : list()
+##   .. .. ..- attr(*, &quot;class&quot;)= chr  &quot;collector_character&quot; &quot;collector&quot;
+##   .. ..$ eventType   : list()
+##   .. .. ..- attr(*, &quot;class&quot;)= chr  &quot;collector_character&quot; &quot;collector&quot;
+##   .. ..$ Location    : list()
+##   .. .. ..- attr(*, &quot;class&quot;)= chr  &quot;collector_character&quot; &quot;collector&quot;
+##   .. ..$ Venue       : list()
+##   .. .. ..- attr(*, &quot;class&quot;)= chr  &quot;collector_character&quot; &quot;collector&quot;
+##   .. ..$ composerName: list()
+##   .. .. ..- attr(*, &quot;class&quot;)= chr  &quot;collector_character&quot; &quot;collector&quot;
+##   .. ..$ workTitle   : list()
+##   .. .. ..- attr(*, &quot;class&quot;)= chr  &quot;collector_character&quot; &quot;collector&quot;
+##   ..$ default: list()
+##   .. ..- attr(*, &quot;class&quot;)= chr  &quot;collector_guess&quot; &quot;collector&quot;
+##   ..- attr(*, &quot;class&quot;)= chr &quot;col_spec&quot;</code></pre>
+<pre><code>## # A tibble: 6 x 8
+##   programID date       Time   eventType    Location  Venue  composerName  
+##       &lt;int&gt; &lt;date&gt;     &lt;chr&gt;  &lt;chr&gt;        &lt;chr&gt;     &lt;chr&gt;  &lt;chr&gt;         
+## 1      3853 1842-12-07 8:00PM Subscriptio~ Manhatta~ Apoll~ Beethoven,  L~
+## 2      3853 1842-12-07 8:00PM Subscriptio~ Manhatta~ Apoll~ Weber,  Carl ~
+## 3      3853 1842-12-07 8:00PM Subscriptio~ Manhatta~ Apoll~ Hummel,  Joha~
+## 4      3853 1842-12-07 8:00PM Subscriptio~ Manhatta~ Apoll~ &lt;NA&gt;          
+## 5      3853 1842-12-07 8:00PM Subscriptio~ Manhatta~ Apoll~ Weber,  Carl ~
+## 6      3853 1842-12-07 8:00PM Subscriptio~ Manhatta~ Apoll~ Rossini,  Gio~
+## # ... with 1 more variable: workTitle &lt;chr&gt;</code></pre>
+<p>There’s obviously a bit more to clean up here, but I’ll skip those <em>tiny</em> details and instead focus on the findings. If you’re interested, the code is all up on <a href="https://github.com/jiunsiew/NY_Philarchive_performanceHistory/tree/master/Scripts">Github</a>.</p>
+<p>So, let’s have a look at a few things I found interesting.</p>
+</div>
+<div id="performances-over-time" class="section level3">
+<h3>Performances over time</h3>
+<p>One of the immediate questions I was curious to find out was how the number of performances might have changed over time.</p>
+<p>The conventional wisdom seems to suggest that classical music’s popularity has been in decline and I wondered if this was reflected in the data.</p>
+<p>Here’s a time series of the total number of performances that have been held.</p>
+<p><img src="/posts/2016-10-16-NewYork-Philharmonic-Performance_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>It looks like after a slow start for the first 50 years, the number of performances really shoot up to new level from about 1907 (indicated by the red dashed line) and peaks about 1925. A brief check of the NY Philharmonic history on <a href="https://en.wikipedia.org/wiki/New_York_Philharmonic">Wikipedia</a> reveals that this was in large part due to a merger with the National Symphony Orchestra in 1921 and the data certainly reflects this.</p>
+<p>Performances seem to trend down between the 1930’s to 1960’s but given that this period encompasses both the Great Depression and the Second World War, I actually think it’s quite remarkable that the NY Philharmonic performed as much as they did.</p>
+</div>
+<div id="top-composers" class="section level3">
+<h3>Top composers</h3>
+<p>The second question I had in mind was which composers had the most works performed? I know I’ve got my favorites, but how would my preferences compare to the NY Phil?</p>
+<p>Across the entire time range, here are the top 20 most performed composers:</p>
+<p><img src="/posts/2016-10-16-NewYork-Philharmonic-Performance_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>Wagner for the win! Who would have thought! Beethoven–one of my favorites– comes in at a respectable second place with Tchaikovsky coming in third. Wagner really surprised me, as he was primarily an operatic composer but nonetheless, some of his works seem very popular.</p>
+<p>Which got me wondering: which works were most popular? Here’s a plot of the top 10 most played works by composer.</p>
+<p><img src="/posts/2016-10-16-NewYork-Philharmonic-Performance_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>Unsurprisingly, Wagner features heavily here with half of the top 10 most played pieces being one of his compositions. Also unsurprising is that Beethoven’s only work in the top ten is his iconic fifth symphony.</p>
+<p>Also unexpected but not surprising, is that the American national anthem gets played very often, about as much as Berlioz’s Damnation of Faust. Go figure.</p>
+<p>Gershwin creeps in the tenth spot here with Porgy and Bess which is rather interesting–I’ll have to look more into this one.</p>
+</div>
+<div id="location-location-location" class="section level3">
+<h3>Location, location, location</h3>
+<p>In the podcast, Barbara also mentioned a world tour that the Philharmonic took which made the national newspapers at the time. Being based in Melbourne Australia, I thought I’d also have a look at the countries where the NY Philharmonic has performed over the years.</p>
+<p><img src="/posts/2016-10-16-NewYork-Philharmonic-Performance_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>In the plot above, the dashed lines are the years where there was a tour as detailed on their <a href="http://nyphil.org/about-us/history/overview">website</a>. The size of the dots indicate the number of performances in that country that year while the colours indicate the <em>total</em> number of times they have performed in that particular country over the entire period.</p>
+<p>The colour coding really highlights just how popular Germany is as a destination for the group, and more broadly, Europe. Japan looks like the only main Asian country that gets a regular NY Phil visit.</p>
+<p>What I also found really fascinating was the almost complete absence of any tours between 1925 and 1950 (Canada would technically be a foreign country but you could argue it’s just next door). Where do you first go after a 25 year touring hiatus? Why Scotland, of course.</p>
+<p>The other feather in the diplomatic cap for the group was its 2008 performance in North Korea. It’s really quite incredible how widely traveled the group has been.</p>
+</div>
+<div id="composer-groupings" class="section level3">
+<h3>Composer groupings?</h3>
+<p>The last thing I will look at for this post will be composer pairings–i.e. how many times do combinations of composers occur in the same performance. The heat map below shows the number of times (in log scale) works of both composers are performed in a performance. Pairings that don’t exists or consist of only a single composer have been shaded green.</p>
+<p><img src="/posts/2016-10-16-NewYork-Philharmonic-Performance_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>The plot shows a very high concentration of performances at the bottom left corner–which is quite expected given that these are the top most performed composers.</p>
+<p>There is quite a dominant American composer themed program with composers like Gershwin, Copland, Bernstein, Rogers and Sousa all having high counts of combinations. This is most obvious when looking at the row for Richard Rogers which is mostly blueish (low counts) but <em>“lights up”</em> red for columns with Gerswhin, Copland, Bernstein and Sousa. A similar trend is also evident for the trio of Russian composers: Rachmaninoff, Shostakovich and Rimski-Korsakov.</p>
+<p>Although slightly difficult to see from the heatmap, Beethoven does seem to be performed with a wider variety of other composers more frequently than Wagner, even though Wagner has had more of his works performed. A closer look at the distribution of performances involving these two composers confirms this:</p>
+<p><img src="/posts/2016-10-16-NewYork-Philharmonic-Performance_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p>So, although Wagner is played the most often, his works are not performed as widely with other composers (at least composers in the top 50). In contrast, Beethoven seems to be paired more often with a wider number of other composers. I do wonder if this has anything to do with how varied Beethoven’s work is–from being more classically bent in his early works to being more romantic at the end of his career. It would be a nice explanation but I will leave that for people more knowledgeable than me on that to comment.</p>
+</div>
+<div id="the-end" class="section level3">
+<h3>The End</h3>
+<p>It’s always very exciting finding nuggets of information after doing a bit of exploratory analysis and this was personally very rewarding. If anything it’s given me some ideas about my next playlist.</p>
+<p>The R markdown file with the complete code used to generate all these visuals can be found here on my <a href="https://github.com/jiunsiew/jiunsiew.github.io/tree/master/_R/2016-10-16-NewYork-Philharmonic-Performance.Rmd">Github repository</a></p>
+</div>
+</div>

@@ -1,0 +1,4 @@
+*.scssc
+_site/
+.Rproj.user
+.RHistory
