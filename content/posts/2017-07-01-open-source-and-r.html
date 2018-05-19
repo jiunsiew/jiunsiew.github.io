@@ -1,8 +1,9 @@
 ---
 title: "Open source, R and things to consider"
+author: "Jiun Siew"
 categories: ["R"]
 tags: ["R", "open source"]
-date: 2017-06-25
+date: 2017-07-01
 showDate: true
 ---
 
@@ -16,10 +17,9 @@ showDate: true
 <p>The upshot? All things considered, I think open source still has a very strong case. There are however, some guidelines which you might want to follow if you do so:</p>
 <ul>
 <li>When using open source software, you are in many ways assuming responsibility of the reliability of the software. If something breaks, the onus is on you to fix it. As such, you will need to be, or have people who are motivated and clever enough to try and fix problems themselves. In some organisations, assumption of this responsibility is too much to ask and so open source is a very risky proposition. In others, finding motivated and clever people is too big an ask in which case arguing about open source software is probably the least of your worries (been there, done that, don’t want the T-shirt).</li>
-<li>Use libraries or packages that are well supported and actively developed. In a previous workplace, we adopted the use of a deprecated numerical library and later found bugs in one of the functions we heavily relied on. As the library was deprecated, we had no way of fixing it ourselves (not to mention hours of time lost trying to find the bug in the first place).
-<ul>
+<li>Use libraries or packages that are well supported and actively developed. In a previous workplace, we adopted the use of a deprecated numerical library and later found bugs in one of the functions we heavily relied on. As the library was deprecated, we had no way of fixing it ourselves (not to mention hours of time lost trying to find the bug in the first place).<br />
+</li>
 <li>For R, the existence of a repository like CRAN provides a lot of assurance and visibility to package development activity. Using packages from here and checking their development activity can go a long way in putting IT admins minds at ease.</li>
-</ul></li>
 <li>Wait before you update. I think this goes with just about any software but with open source, updates can be very often, particularly for R and their libraries. Having a good versioning system for code <strong>and</strong> packages is a really good idea. Packages like <a href="https://rstudio.github.io/packrat/"><code>packrat</code></a> are worth investigating if you’re planning on productionising your code/models/dashboards.</li>
 </ul>
 </div>

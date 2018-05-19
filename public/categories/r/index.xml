@@ -6,10 +6,19 @@
     <description>Recent content in R on The Hungry Wonderer</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
-    <lastBuildDate>Sun, 25 Jun 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 01 Jul 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/categories/r/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Open source, R and things to consider</title>
+      <link>/posts/2017-07-01-open-source-and-r/</link>
+      <pubDate>Sat, 01 Jul 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/2017-07-01-open-source-and-r/</guid>
+      <description>IntroductionBeing one of the organisers of the Melbourne Users of R Network, I often get asked about how R might be used in organisations and how to provide IT admins comfort that R isn’t going to take down their whole system or infect their computers with bad libraries and unsupported code. After fixing the issue at hand (and the frustration had subsided), it dawned on me that this was a good example of both the good and bad of open source software and the types of things people and organisations who are going looking at adopting R or python for analytics might want to consider.</description>
+    </item>
     
     <item>
       <title>How to get RPostgresSQL working with Postgres.app</title>
@@ -19,15 +28,6 @@
       <guid>/posts/2017-06-25-how-to-get-rpostgressql-working-with-postgressapp/</guid>
       <description>IntroductionOn a recent whim, I decided to upgrade to the latest version of dplyr to version 0.7.0 without doing much prior reading into the changes that were made. As a result, I very quickly discovered the database connections that were once in-built had been abstracted to another package called dbplyr, resulting in some strange errors. “No worries”, I thought as I then just installed that package.
 Re-running some code that connected to a local Postgres database provided some very frustrating errors.</description>
-    </item>
-    
-    <item>
-      <title>Open source, R and things to consider</title>
-      <link>/posts/2017-07-01-open-source-and-r/</link>
-      <pubDate>Sun, 25 Jun 2017 00:00:00 +0000</pubDate>
-      
-      <guid>/posts/2017-07-01-open-source-and-r/</guid>
-      <description>IntroductionBeing one of the organisers of the Melbourne Users of R Network, I often get asked about how R might be used in organisations and how to provide IT admins comfort that R isn’t going to take down their whole system or infect their computers with bad libraries and unsupported code. After fixing the issue at hand (and the frustration had subsided), it dawned on me that this was a good example of both the good and bad of open source software and the types of things people and organisations who are going looking at adopting R or python for analytics might want to consider.</description>
     </item>
     
     <item>

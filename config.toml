@@ -18,7 +18,7 @@ ignoreFiles             = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
     clickablePhotos     = true                          # Allow links to the full size images
     footerText          = "Discoveries and encounters in the world of analytics (and R)"
 
-# Metadata
+    # Metadata
     description         = "Discoveries and encounters in the world of analytics (and R)"            # Max 160 characters show in search results
     twitterCard         = "summary_large_image"         # Card value “summary”, “summary_large_image”, “app”, or “player”
     ## primaryImage        = "/tn.png"                     # Image that shows on Twitter cards and OpenGraph links
