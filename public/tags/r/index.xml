@@ -31,6 +31,16 @@ Re-running some code that connected to a local Postgres database provided some v
     </item>
     
     <item>
+      <title>Speeding up loops - a brief foray into C&#43;&#43; using Rcpp</title>
+      <link>/posts/2017-04-01-speding-up-loops--a-brief-foray-into-c-using-rcpp/</link>
+      <pubDate>Sat, 01 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/2017-04-01-speding-up-loops--a-brief-foray-into-c-using-rcpp/</guid>
+      <description>IntroductionOne of the best things about R (and open source in general), is that you get to ride on the back of some really, really clever contributions of others. For the R community, Hadley Wickham’s ggplot and dplyr packages are legendary. However, one equally (in my opinion, at least) amazing package is Rcpp, written by Dirk Eddelbuettel.
+Why is this such an amazing package? In a nutshell, it allows R users to harness the power of C++ functions with comparative ease.</description>
+    </item>
+    
+    <item>
       <title>New York Philharmonic Performances</title>
       <link>/posts/2016-10-16-newyork-philharmonic-performance/</link>
       <pubDate>Sun, 16 Oct 2016 00:00:00 +0000</pubDate>

@@ -31,6 +31,16 @@ Re-running some code that connected to a local Postgres database provided some v
     </item>
     
     <item>
+      <title>Speeding up loops - a brief foray into C&#43;&#43; using Rcpp</title>
+      <link>/posts/2017-04-01-speding-up-loops--a-brief-foray-into-c-using-rcpp/</link>
+      <pubDate>Sat, 01 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/2017-04-01-speding-up-loops--a-brief-foray-into-c-using-rcpp/</guid>
+      <description>IntroductionOne of the best things about R (and open source in general), is that you get to ride on the back of some really, really clever contributions of others. For the R community, Hadley Wickham’s ggplot and dplyr packages are legendary. However, one equally (in my opinion, at least) amazing package is Rcpp, written by Dirk Eddelbuettel.
+Why is this such an amazing package? In a nutshell, it allows R users to harness the power of C++ functions with comparative ease.</description>
+    </item>
+    
+    <item>
       <title>New York Philharmonic Performances</title>
       <link>/posts/2016-10-16-newyork-philharmonic-performance/</link>
       <pubDate>Sun, 16 Oct 2016 00:00:00 +0000</pubDate>
@@ -94,17 +104,6 @@ http://stackoverflow.com/questions/5967593/ordering-of-bars-in-ggplot
 In particular, I’d never heard of the reorder() command before and would usually reorder the data frame for plotting manually.
 Here’s how I would have normally done it:
 ## Notice the as.is = TRUEbreadth_data &amp;lt;- read.table(textConnection(&amp;quot;Stakeholder Value&amp;#39;Grantseekers&amp;#39; 0.90&amp;#39;Donors&amp;#39; 0.89&amp;#39;Community&amp;#39; 0.55&amp;#39;Hurricane Relief Fund&amp;#39; 0.24&amp;#39;Media&amp;#39; 0.19&amp;#39;Employment Seekers&amp;#39; 0.12&amp;#39;Affiliates&amp;#39; 0.10&amp;#39;Youth&amp;#39; 0.09&amp;#39;Women&amp;#39; 0.02&amp;#39;Former Board Members&amp;#39; 0.</description>
-    </item>
-    
-    <item>
-      <title>Hello R Markdown</title>
-      <link>/posts/2015-07-23-r-rmarkdown/</link>
-      <pubDate>Thu, 23 Jul 2015 21:13:14 -0500</pubDate>
-      
-      <guid>/posts/2015-07-23-r-rmarkdown/</guid>
-      <description>R MarkdownThis is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
-You can embed an R code chunk like this:
-summary(cars)## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 26.00 ## Median :15.0 Median : 36.00 ## Mean :15.4 Mean : 42.98 ## 3rd Qu.</description>
     </item>
     
     <item>

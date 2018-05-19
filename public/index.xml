@@ -6,29 +6,10 @@
     <description>Recent content on The Hungry Wonderer</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-uk</language>
-    <lastBuildDate>Thu, 08 Mar 2018 20:18:53 -0500</lastBuildDate>
+    <lastBuildDate>Tue, 13 Feb 2018 13:42:49 -0500</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>Long Form Post</title>
-      <link>/posts_original/long-form-post/</link>
-      <pubDate>Thu, 08 Mar 2018 20:18:53 -0500</pubDate>
-      
-      <guid>/posts_original/long-form-post/</guid>
-      <description>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Cursus eget nunc scelerisque viverra. Quam vulputate dignissim suspendisse in est ante in nibh mauris. Pharetra magna ac placerat vestibulum lectus mauris. Eget lorem dolor sed viverra ipsum. Elementum nisi quis eleifend quam adipiscing. Aliquet nec ullamcorper sit amet risus. Auctor neque vitae tempus quam pellentesque. Tincidunt lobortis feugiat vivamus at augue.</description>
-    </item>
-    
-    <item>
-      <title>Code Poetry</title>
-      <link>/posts_original/code-poetry/</link>
-      <pubDate>Tue, 13 Feb 2018 13:56:12 -0500</pubDate>
-      
-      <guid>/posts_original/code-poetry/</guid>
-      <description>Pseudo code poem.
-if (this === that): try write_new_poem() except not_a_poet as e: return </description>
-    </item>
     
     <item>
       <title>About</title>
@@ -39,53 +20,6 @@ if (this === that): try write_new_poem() except not_a_poet as e: return </descri
       <description>The main reason for this blog I forget easily. This is a repository about my discoveries in all things related to data analytics, and the so called science behind it.
 Writing about it will hopefully help me remember something. At the very least, I&amp;rsquo;ll have a copy of it online.
 The main reason for this page An engineer by training with a signal processing background, I have been doing mathematical and statistical modelling work in lots of different sectors like wireless communications, financial risk management in energy markets, energy forecasting and website companies.</description>
-    </item>
-    
-    <item>
-      <title>About</title>
-      <link>/about_original/</link>
-      <pubDate>Tue, 13 Feb 2018 13:42:49 -0500</pubDate>
-      
-      <guid>/about_original/</guid>
-      <description>Hello, I&amp;rsquo;m Sam. I&amp;rsquo;m a theme for Hugo. I&amp;rsquo;m an extremely customizable, content-focused theme that lets you showcase your work your way.
-I have slick minimalist templates for list pages (such as a list of blog posts) and single pages (a page to read one blog post). You can use tags on your content, and view content by tags.
-I also have a simple responsive gallery built with CSS grid. It&amp;rsquo;ll look great on any screen, and all you have to do is provide a folder of images.</description>
-    </item>
-    
-    <item>
-      <title>Dear Jane, regarding Mr. Bennet</title>
-      <link>/posts_original/dear-jane/</link>
-      <pubDate>Sun, 11 Feb 2018 12:34:41 -0500</pubDate>
-      
-      <guid>/posts_original/dear-jane/</guid>
-      <description>Chapter One It is a truth universally acknowledged, that a single man in possession of a good fortune, must be in want of a wife.
-However little known the feelings or views of such a man may be on his first entering a neighbourhood, this truth is so well fixed in the minds of the surrounding families, that he is considered the rightful property of some one or other of their daughters.</description>
-    </item>
-    
-    <item>
-      <title>Oh, Alice</title>
-      <link>/posts_original/oh-alice/</link>
-      <pubDate>Fri, 09 Feb 2018 12:32:12 -0500</pubDate>
-      
-      <guid>/posts_original/oh-alice/</guid>
-      <description>Nor did such soothing scenes, however temporary, fail of at least as temporary an effect on Ahab. But if these secret golden keys did seem to open in him his own secret golden treasuries, yet did his breath upon them prove but tarnishing. Alice opened the door and found that it led into a small passage, not much larger than a rat-hole: she knelt down and looked along the passage into the loveliest garden you ever saw.</description>
-    </item>
-    
-    <item>
-      <title>A Poem</title>
-      <link>/posts_original/a-poem/</link>
-      <pubDate>Thu, 01 Feb 2018 12:35:11 -0500</pubDate>
-      
-      <guid>/posts_original/a-poem/</guid>
-      <description>Now pleasing sleep had seal&amp;rsquo;d each mortal eye,
-Stretch&amp;rsquo;d in the tents the Grecian leaders lie:
-The immortals slumber&amp;rsquo;d on their thrones above;
-All, but the ever-wakeful eyes of Jove.(76)
-To honour Thetis&amp;rsquo; son he bends his care,
-And plunge the Greeks in all the woes of war:
-Then bids an empty phantom rise to sight,
-And thus commands the vision of the night.
-&amp;ldquo;Fly hence, deluding Dream! and light as air,(77)</description>
     </item>
     
     <item>
@@ -105,6 +39,16 @@ Re-running some code that connected to a local Postgres database provided some v
       
       <guid>/posts/2017-07-01-open-source-and-r/</guid>
       <description>IntroductionBeing one of the organisers of the Melbourne Users of R Network, I often get asked about how R might be used in organisations and how to provide IT admins comfort that R isn’t going to take down their whole system or infect their computers with bad libraries and unsupported code. After fixing the issue at hand (and the frustration had subsided), it dawned on me that this was a good example of both the good and bad of open source software and the types of things people and organisations who are going looking at adopting R or python for analytics might want to consider.</description>
+    </item>
+    
+    <item>
+      <title>Speeding up loops - a brief foray into C&#43;&#43; using Rcpp</title>
+      <link>/posts/2017-04-01-speding-up-loops--a-brief-foray-into-c-using-rcpp/</link>
+      <pubDate>Sat, 01 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/2017-04-01-speding-up-loops--a-brief-foray-into-c-using-rcpp/</guid>
+      <description>IntroductionOne of the best things about R (and open source in general), is that you get to ride on the back of some really, really clever contributions of others. For the R community, Hadley Wickham’s ggplot and dplyr packages are legendary. However, one equally (in my opinion, at least) amazing package is Rcpp, written by Dirk Eddelbuettel.
+Why is this such an amazing package? In a nutshell, it allows R users to harness the power of C++ functions with comparative ease.</description>
     </item>
     
     <item>
@@ -171,17 +115,6 @@ http://stackoverflow.com/questions/5967593/ordering-of-bars-in-ggplot
 In particular, I’d never heard of the reorder() command before and would usually reorder the data frame for plotting manually.
 Here’s how I would have normally done it:
 ## Notice the as.is = TRUEbreadth_data &amp;lt;- read.table(textConnection(&amp;quot;Stakeholder Value&amp;#39;Grantseekers&amp;#39; 0.90&amp;#39;Donors&amp;#39; 0.89&amp;#39;Community&amp;#39; 0.55&amp;#39;Hurricane Relief Fund&amp;#39; 0.24&amp;#39;Media&amp;#39; 0.19&amp;#39;Employment Seekers&amp;#39; 0.12&amp;#39;Affiliates&amp;#39; 0.10&amp;#39;Youth&amp;#39; 0.09&amp;#39;Women&amp;#39; 0.02&amp;#39;Former Board Members&amp;#39; 0.</description>
-    </item>
-    
-    <item>
-      <title>Hello R Markdown</title>
-      <link>/posts/2015-07-23-r-rmarkdown/</link>
-      <pubDate>Thu, 23 Jul 2015 21:13:14 -0500</pubDate>
-      
-      <guid>/posts/2015-07-23-r-rmarkdown/</guid>
-      <description>R MarkdownThis is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
-You can embed an R code chunk like this:
-summary(cars)## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 26.00 ## Median :15.0 Median : 36.00 ## Mean :15.4 Mean : 42.98 ## 3rd Qu.</description>
     </item>
     
     <item>
