@@ -1,60 +1,0 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Data Visualisation on The Hungry Wonderer</title>
-    <link>/tags/data-visualisation/</link>
-    <description>Recent content in Data Visualisation on The Hungry Wonderer</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-uk</language>
-    <lastBuildDate>Sun, 16 Oct 2016 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/tags/data-visualisation/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>New York Philharmonic Performances</title>
-      <link>/posts/2016-10-16-newyork-philharmonic-performance/</link>
-      <pubDate>Sun, 16 Oct 2016 00:00:00 +0000</pubDate>
-      
-      <guid>/posts/2016-10-16-newyork-philharmonic-performance/</guid>
-      <description>The New York Philharmonic Performance DatasetOne of the really great things about listening to the FiveThirtyEight podcast is that you sometimes come across some very interesting data sets. In one episode, they interviewed Barbara Haws–the archivist/historian, of the New York Philharmonic Orchestra from which I learnt that their complete performance history dating back to 1842 is on Github!
-Data and music are two things I really love, so it wasn’t long before I started digging into the data.</description>
-    </item>
-    
-    <item>
-      <title>Exploratory Data Analysis with Plotly @ MelbURN</title>
-      <link>/posts/2016-05-30-exploratory-data-analysis-with-plotly/</link>
-      <pubDate>Mon, 30 May 2016 00:00:00 +0000</pubDate>
-      
-      <guid>/posts/2016-05-30-exploratory-data-analysis-with-plotly/</guid>
-      <description>I recently had the honour of presenting at the Melbourne User of R Network (MelbURN) where I presented on the R package plotly.
-In this presentation, I compared doing some exploratory data analysis with Plotly using the performance data of the New York Philharmonic Orchestra (which is publically available here).
-The presentation can be found here and is best viewed with Chrome or Safari: http://jiunsiew.github.io/plotly_presentation/
-The main point of the talk is really that Plotly plots can be really powerful, primarily because of its interactivity capabilities.</description>
-    </item>
-    
-    <item>
-      <title>Reordering Bar Charts with ggplot</title>
-      <link>/posts/2016-04-18-reordering-bar-charts-with-ggplot/</link>
-      <pubDate>Mon, 18 Apr 2016 00:00:00 +0000</pubDate>
-      
-      <guid>/posts/2016-04-18-reordering-bar-charts-with-ggplot/</guid>
-      <description>Found this solution on stack overflow and it was brilliant!
-http://stackoverflow.com/questions/5967593/ordering-of-bars-in-ggplot
-In particular, I’d never heard of the reorder() command before and would usually reorder the data frame for plotting manually.
-Here’s how I would have normally done it:
-## Notice the as.is = TRUEbreadth_data &amp;lt;- read.table(textConnection(&amp;quot;Stakeholder Value&amp;#39;Grantseekers&amp;#39; 0.90&amp;#39;Donors&amp;#39; 0.89&amp;#39;Community&amp;#39; 0.55&amp;#39;Hurricane Relief Fund&amp;#39; 0.24&amp;#39;Media&amp;#39; 0.19&amp;#39;Employment Seekers&amp;#39; 0.12&amp;#39;Affiliates&amp;#39; 0.10&amp;#39;Youth&amp;#39; 0.09&amp;#39;Women&amp;#39; 0.02&amp;#39;Former Board Members&amp;#39; 0.</description>
-    </item>
-    
-    <item>
-      <title>ggplot express (1)</title>
-      <link>/posts/2015-01-10-ggplot-express-1/</link>
-      <pubDate>Sat, 10 Jan 2015 00:00:00 +0000</pubDate>
-      
-      <guid>/posts/2015-01-10-ggplot-express-1/</guid>
-      <description>Here are some code snippets with ggplot that I use very often but forget equally as much.
-# to set the theme so you don&amp;#39;t have to keep typing &amp;quot;+ theme_bw()&amp;quot;theme_set(theme_bw())# to rotate the x-axis labelstheme(axis.text.x = element_text(angle = 90, hjust = 1))# to put the legend at the bottom/top/wherevertheme(legend.position = &amp;#39;bottom&amp;#39;) # or wherever you want--see the help# to stack the legend icons and position the legend titleguides(col = guide_legend(ncol = 7, title.</description>
-    </item>
-    
-  </channel>
-</rss>
