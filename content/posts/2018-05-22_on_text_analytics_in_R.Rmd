@@ -1,0 +1,229 @@
+---
+title: "On the text analysis packages in R"
+author: "Jiun Siew"
+categories: ["R"]
+tags: ["R", "text analytics"]
+date: 2018-05-22
+showDate: true
+---
+
+I recently had the privelege of having to do some text analytics at work and
+wanted to pen down some thoughts on what I found useful and what didn't work so
+well.
+
+## Data Cleaning
+Cleaning free text data is by far, one of the hardest types of data that I've 
+had to deal with.  In most textbooks/online tutorials, the corpus is usually 
+cleaned, making the document term matrix (DTM) creation fairly straightforward. 
+In the corpus that I had to work with, I found:
+
+1. tons of spelling errors
+2. acronyms and jargon that are domain specific
+3. names, initials of names, and even nicknames
+
+The realities of trying to do some text analysis on really, really dirty data 
+means that extensive effort and thought is required to get the right set of 
+terms and vocabulary before any modelling can even begin.
+
+For example, the corpus I was working with had different abbreviations for 
+the same string.  One that I found was the term `owner occupier` which 
+was written as `o'occ`, `O/oc`, `own occ`, `owner occ`, `O/O`, `OO` and `oocc`.
+
+While removing punctuation and forcing the text to lower case might have helped, 
+the DTM for the word `owner` and `occupier` would have effectively been missing 
+valuable counts.  
+
+### Cleaning, bit by bit
+After lots of trial and error, I eventually developed a process to clean the 
+data so that it provided relatively good modelling results and was reasonably 
+easy to automate.  There were two main components to this process:
+
+- replacing abbreviations, jargon with appropriate terminology
+- spell Checking
+
+Under pinning all this was the tokenization process which is where you chop up 
+each word (or combination of words, also called `n-grams`) into a single item.
+
+Each main topic is discussed below.
+
+#### Replacing abbreviations, jargon with appropriate terminology
+As given in the example above, I created a list of common abbreviations and 
+jargon that were duplicates and also didn't make a lot of sense on it's own.  
+This was tedious, slow and painful but once done provided a good step in 
+cleaning the data.  
+
+The function looked something like this:
+
+```{r replaceText, eval=FALSE}
+## function to find and replace strings 
+#' @param docVec vector where each element is a document
+#' @param replaceDf basically a lookup table with one column the text to look 
+#' for and the second column, the text to replace it with
+#' @param ignore_case option to ignore case in string matching
+#' Returns a character vector with the strings replaced appropriately
+replaceTextFn <- function(docVec, replaceDf, ignore_case = TRUE){
+  output <- docVec
+  for (iR in 1:nrow(replaceDf)){
+    abbrvStr <- regex(paste0("\\b", replaceDf$abbreviation[iR], "\\b"), 
+                      ignore_case = ignore_case)
+    replaceStr <- replaceDf$replacement_text[iR]
+    
+    output <- str_replace_all(output, abbrvStr, replaceStr)
+  }
+  
+  return(output)
+}
+```
+
+The function relies obviously on the `stringr` package.  
+
+As a side note, I did try using the `fastmatch::fmatch` function as suggested 
+in this [SO thread](https://stackoverflow.com/questions/41587158/replace-words-in-text2vec-efficiently) 
+but found the timings to be quite similar.  Quite possibly, this is because 
+of the loop I'm using.
+
+Also, it is possible to try and replace all the terms in the corpus in this way 
+but I also found some diminishing returns for words that occur very infrequently.  
+
+
+#### Spell Checking
+While the method above is pretty good for words or abbreviations that are 
+commonly found in the corpus, it doesn't really suit for spelling mistakes of 
+common words.  
+
+For example, here were five mispelled words in the corpus:
+
+- `goog`, 
+- `scondary`,
+- `strenghts`,
+- `thier`,
+- `Accetable`, 
+
+there were lots of spelling mistakes in the data.  Trying to catch all word 
+replacements as in Step 1 would be unpractical as it would require constant 
+manual checking and updating.  
+
+To solve this problem, I used the `hunspell` spell checking package (which turns
+ out is also used in Firefox and RStudio).  However, I also found that spell 
+checking for a domain specific corpus is not the same as general English usage.
+
+Hence, I had to make two slight modifications to make this workable:
+
+1. Introducing abbreviations to the dictionary
+2. Prioritising words that are found in the corpus vocabulary instead of the 
+dictionary.  
+
+Adding words to the dictionary is fairly straightforward:
+
+`myDict <- dictionary(lang = "en_GB", add_words = dict$abbreviation)`
+
+Note that in this case, the `add_words` argument is just a list was manually 
+curated and included names and initials of people.  
+
+The `hunspell_suggest` function however, provides several possibilities of 
+spelling corrections.  Some of these possibilities, taken blindly, actually 
+introduce words that are not in the vocabulary of the corpus.  Take for example, 
+the misspelt word `"refr"`.  Here are the suggested replacements from `hunspell`:
+
+```{r hunspellEx, echo=FALSE}
+hunspell::hunspell_suggest("refr")
+```
+
+The correct word replacement is `"refer"` which is the second word in the list.
+The first word however, was not in the vocabulary of the corpus, hence, can be 
+removed.  I thus, created a function that prioritised words in the corpus over 
+blindly using the suggested output of `hunspell`.  
+
+```{r eval=FALSE, spellCheck}
+# customised spell checking function that prioritises words found in the corpus
+# vocabulary instead of the output of hunspell_suggest
+#' @param x is a character string
+spellCheckFn <- function(x){
+  ## get suggested spelling corrections
+  tmp <- unlist(hunspell_suggest(x, dict = myDict))
+  
+  ## rank them by term frequency as found in the corpus
+  tmpVocab <- vocab %>% 
+    filter(term %in% tmp) %>% 
+    arrange(desc(term_count))
+  
+  ## if suggested spellings in hunspell are found in corpus, use the 
+  ## most frequent term, otherwise just use the first suggested item from 
+  ## hunspell
+  if (nrow(tmpVocab) > 0){
+    repWord <- tmpVocab$term[1]
+  } else{
+    repWord <- tmp[1]
+  }
+  return(repWord)
+}
+```
+
+Note that the dictionary `myDict` should be in the global environment and the 
+output of the function provides a single replacement text for the provided 
+input string.
+
+Once replacements were found for each mispelt word, the corpus was then replaced 
+with the `replaceTextFn` above.  The `vocab` object is a data frame containing 
+the term and frequency count of that term in the corpus--see below.
+
+
+#### Tokenization
+As a big fan of the `tidyverse`, I initially started using [David Robinson's](http://varianceexplained.org/about/) 
+`tidytext` package [1,2].  Tokenization with this package is very simple with 
+the `unnest_tokens` function and once 'tidied', was extremely natural to use 
+with all the common `dplyr` functions and (not)-pipes (i.e. `%>%`).  However, I 
+did notice that the tibbles it was creating were hogging up a lot of 
+memory.  
+
+Another package that that can be used for text analytics is `text2vec` [3,4] 
+which handles both the tokenization/DTM creation, and some very powerful 
+modelling methods as well.  I found the tokenization quicker, and also very 
+memory efficient.  It also handles `n-grams` extremely easily as well as 
+stop words.  See [3,4] for more details.
+
+
+## LDA Packages
+One of the main reasons for using `text2vec` is because of its LDA modelling 
+capabilities and also has other in built embeddings like *GloVe* [5].  The LDA 
+model in `text2vec` is a wrapper to the `WarpLDA` algorithm [6] which I found 
+ran extremely efficiently. One potential downside is that the package is 
+relatively new with the latest CRAN version at 0.5.1.  The package maintainer, 
+however, is really active so bugs do get fixed fairly quickly.
+
+The other package I used was `topicmodels` [7] which provides more options but runs 
+significantly slower.  The package works with the famous `tm` package so all 
+inputs will require conversion to `tm` objects.  It does however, provide three 
+different topic modelling algorithms: one based on Gibbs sampling, one based on 
+variational expectation-maximisation (VEM) and correlated topics model (CTM).  
+
+
+
+
+
+## References
+[1] J. Silge and D. Robinson, "tidytext: Text Mining and Analysis Using 
+Tidy Data Principles in R." *Journal Of Statistical Software*, vol. 1 no. 3, 
+2016. [Online]. Available: 
+[http://dx.doi.org/10.21105/joss.00037](http://dx.doi.org/10.21105/joss.00037). 
+
+[2] J. Silge and D. Robinson,"Text Mining with R", [Online]. Available: 
+[https://www.tidytextmining.com/tidytext.html](https://www.tidytextmining.com/tidytext.html)
+
+[3] D. Selivanov and Q. Wang, "text2vec: Modern Text Mining Framework for R", 
+Available: [https://cran.r-project.org/package=text2vec](https://cran.r-project.org/package=text2vec)
+
+[4] D. Selivanov, [Online]. Available: [http://text2vec.org/](http://text2vec.org/)
+
+[5] J. Pennington, R. Socher, and C.D. Manning, "GloVe: Global Vectors for 
+Word Representation", *Empirical Methods in Natural Language Processing (EMNLP)*, 
+pp. 1532-1543, 2014
+
+[6] J. Chen, K. Li, J. Zhu, W. Chen, "WarpLDA: a Cache Efficient O(1) 
+Algorithm for Latent Dirichlet Allocation", *ARXIV*, 2 Mar 2016, [Online]. 
+Available: [https://arxiv.org/abs/1510.08628](https://arxiv.org/abs/1510.08628)
+
+[7] B. Grün and K. Hornik, "topicmodels: An R Package for Fitting Topic Models." 
+*Journal of Statistical Software* , vol. 40 no. 13, pp. 1-30. [Online]. 
+Available: [http://doi.org/10.18637/jss.v040.i13](http://doi.org/10.18637/jss.v040.i13)
+
